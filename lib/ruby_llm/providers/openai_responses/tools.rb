@@ -21,7 +21,9 @@ module RubyLLM
           file_search: ->(vector_store_ids) { { type: 'file_search', vector_store_ids: vector_store_ids } },
           code_interpreter: { type: 'code_interpreter', container: { type: 'auto' } },
           image_generation: { type: 'image_generation' },
-          computer_use: ->(opts) { { type: 'computer_use_preview', **opts } }
+          computer_use: ->(opts) { { type: 'computer_use_preview', **opts } },
+          shell: { type: 'shell', environment: { type: 'container_auto' } },
+          apply_patch: { type: 'apply_patch' }
         }.freeze
 
         def tool_for(tool)
@@ -186,6 +188,24 @@ module RubyLLM
           tool[:allowed_tools] = allowed_tools if allowed_tools
           tool[:headers] = headers if headers
           tool
+        end
+
+        def shell_tool(environment_type: 'container_auto', container_id: nil,
+                        network_policy: nil, memory_limit: nil)
+          env = if container_id
+                  { type: 'container_reference', container_id: container_id }
+                else
+                  { type: environment_type }
+                end
+
+          env[:network_policy] = network_policy if network_policy
+          env[:memory_limit] = memory_limit if memory_limit
+
+          { type: 'shell', environment: env }
+        end
+
+        def apply_patch_tool
+          { type: 'apply_patch' }
         end
       end
     end

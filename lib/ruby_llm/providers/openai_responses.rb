@@ -44,7 +44,7 @@ module RubyLLM
       # @param response_id [String] The response ID to delete
       # @return [Hash] The deletion result
       def delete_response(response_id)
-        response = @connection.delete(Background.retrieve_url(response_id))
+        response = delete_request(Background.retrieve_url(response_id))
         response.body
       end
 
@@ -75,6 +75,77 @@ module RubyLLM
           sleep interval
         end
       end
+
+      # --- Container Management ---
+
+      # Create a new container
+      # @param name [String, nil] Container name
+      # @param expires_after [Hash, nil] Expiry configuration
+      # @param file_ids [Array<String>, nil] File IDs to copy into container
+      # @param memory_limit [String, nil] Memory limit: '1g', '4g', '16g', '64g'
+      # @return [Hash] Created container data
+      def create_container(name: nil, expires_after: nil, file_ids: nil, memory_limit: nil)
+        payload = Containers.create_payload(
+          name: name, expires_after: expires_after,
+          file_ids: file_ids, memory_limit: memory_limit
+        )
+        response = @connection.post(Containers.containers_url, payload)
+        response.body
+      end
+
+      # Retrieve a container by ID
+      # @param container_id [String] The container ID
+      # @return [Hash] Container data
+      def retrieve_container(container_id)
+        response = @connection.get(Containers.container_url(container_id))
+        response.body
+      end
+
+      # Delete a container
+      # @param container_id [String] The container ID
+      # @return [Hash] Deletion result
+      def delete_container(container_id)
+        response = delete_request(Containers.container_url(container_id))
+        response.body
+      end
+
+      # List files in a container
+      # @param container_id [String] The container ID
+      # @return [Hash] File listing
+      def list_container_files(container_id)
+        response = @connection.get(Containers.container_files_url(container_id))
+        response.body
+      end
+
+      # Retrieve a specific file from a container
+      # @param container_id [String] The container ID
+      # @param file_id [String] The file ID
+      # @return [Hash] File metadata
+      def retrieve_container_file(container_id, file_id)
+        response = @connection.get(Containers.container_file_url(container_id, file_id))
+        response.body
+      end
+
+      # Get file content from a container
+      # @param container_id [String] The container ID
+      # @param file_id [String] The file ID
+      # @return [String] File content
+      def retrieve_container_file_content(container_id, file_id)
+        response = @connection.get(Containers.container_file_content_url(container_id, file_id))
+        response.body
+      end
+
+      private
+
+      # DELETE request via the underlying Faraday connection
+      # RubyLLM::Connection only exposes get/post, so we use Faraday directly
+      def delete_request(url)
+        @connection.connection.delete(url) do |req|
+          req.headers.merge!(headers)
+        end
+      end
+
+      public
 
       class << self
         def capabilities

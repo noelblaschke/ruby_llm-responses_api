@@ -85,6 +85,31 @@ module RubyLLM
           }
         end
 
+        # Shell tool configuration
+        # @param environment_type [String] 'container_auto', 'container_reference', or 'local'
+        # @param container_id [String, nil] Container ID for 'container_reference' type
+        # @param network_policy [Hash, nil] Network policy (e.g. { type: 'allowlist', allowed_domains: [...] })
+        # @param memory_limit [String, nil] Memory limit: '1g', '4g', '16g', '64g'
+        def shell(environment_type: 'container_auto', container_id: nil,
+                  network_policy: nil, memory_limit: nil)
+          env = if container_id
+                  { type: 'container_reference', container_id: container_id }
+                else
+                  { type: environment_type }
+                end
+
+          env[:network_policy] = network_policy if network_policy
+          env[:memory_limit] = memory_limit if memory_limit
+
+          { type: 'shell', environment: env }
+        end
+
+        # Apply Patch tool configuration
+        # Enables the model to create, update, and delete files using structured diffs.
+        def apply_patch
+          { type: 'apply_patch' }
+        end
+
         # Parse web search results from output
         # @param output [Array] Response output array
         # @return [Array<Hash>] Parsed search results with citations
@@ -142,6 +167,39 @@ module RubyLLM
                 id: item['id'],
                 status: item['status'],
                 result: item['result']
+              }
+            end
+        end
+
+        # Parse apply_patch call results from output
+        # @param output [Array] Response output array
+        # @return [Array<Hash>] Parsed apply_patch call results
+        def parse_apply_patch_results(output)
+          output
+            .select { |item| item['type'] == 'apply_patch_call' }
+            .map do |item|
+              {
+                id: item['id'],
+                call_id: item['call_id'],
+                status: item['status'],
+                operation: item['operation']
+              }
+            end
+        end
+
+        # Parse shell call results from output
+        # @param output [Array] Response output array
+        # @return [Array<Hash>] Parsed shell call results
+        def parse_shell_call_results(output)
+          output
+            .select { |item| item['type'] == 'shell_call' }
+            .map do |item|
+              {
+                id: item['id'],
+                call_id: item['call_id'],
+                status: item['status'],
+                action: item['action'],
+                container_id: item['container_id']
               }
             end
         end

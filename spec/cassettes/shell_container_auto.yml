@@ -1,0 +1,189 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.openai.com/v1/responses
+    body:
+      encoding: UTF-8
+      string: '{"model":"gpt-5.2","input":[{"type":"message","role":"user","content":"Run:
+        echo \"hello from shell\""}],"stream":false,"tools":[{"type":"shell","environment":{"type":"container_auto"}}]}'
+    headers:
+      User-Agent:
+      - Faraday v2.14.0
+      Authorization:
+      - Bearer <OPENAI_API_KEY>
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Feb 2026 09:47:05 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      X-Ratelimit-Limit-Requests:
+      - '5000'
+      X-Ratelimit-Limit-Tokens:
+      - '2000000'
+      X-Ratelimit-Remaining-Requests:
+      - '4999'
+      X-Ratelimit-Remaining-Tokens:
+      - '2000000'
+      X-Ratelimit-Reset-Requests:
+      - 12ms
+      X-Ratelimit-Reset-Tokens:
+      - 0s
+      Openai-Version:
+      - '2020-10-01'
+      Openai-Organization:
+      - user-h7m2t30jnyqzec1thkvt5rcd
+      Openai-Project:
+      - proj_yBBvayevSgRR3SVjSmBgm0so
+      X-Request-Id:
+      - req_2d94ec5c144f4a4db581b74104508c7f
+      Openai-Processing-Ms:
+      - '10766'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=FiMxVuBT_MTs2zQMjze9Rt9XuAA5WVEau04fSwGHAkY-1770803214.6456816-1.0.1.1-BDXJsZEDli.OqLcn1TEKE5qVW_w8c8dMfOTV9cG9i241.pVDsvzZYnWThTyA7IGTtvHHfhQzEiVOOmiceWZTOR0Q3GnyirS08BX8vt667o8Sehlw0LjMOWQM4ks87XPl;
+        HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Wed, 11 Feb 2026
+        10:17:05 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      Cf-Ray:
+      - 9cc2ebfb892845e5-WAW
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "id": "resp_0143deaa25eaf13e00698c500ebd2481969c45348ad5fe4ff4",
+          "object": "response",
+          "created_at": 1770803214,
+          "status": "completed",
+          "background": false,
+          "billing": {
+            "payer": "developer"
+          },
+          "completed_at": 1770803225,
+          "error": null,
+          "frequency_penalty": 0.0,
+          "incomplete_details": null,
+          "instructions": null,
+          "max_output_tokens": null,
+          "max_tool_calls": null,
+          "model": "gpt-5.2-2025-12-11",
+          "output": [
+            {
+              "id": "sh_0143deaa25eaf13e00698c5016231c8196b803b7e15c581fff",
+              "type": "shell_call",
+              "status": "completed",
+              "action": {
+                "commands": [
+                  "echo \"hello from shell\""
+                ],
+                "max_output_length": null,
+                "timeout_ms": null
+              },
+              "call_id": "call_54Tz88uVL729I2mc7aFnc4Wg",
+              "environment": {
+                "type": "container_reference",
+                "container_id": "cntr_698c5013c2288190bc626067f1abb059044b98a087359679"
+              }
+            },
+            {
+              "id": "sho_0143deaa25eaf13e00698c5017bb9481969f273db2ff894300",
+              "type": "shell_call_output",
+              "status": "completed",
+              "call_id": "call_54Tz88uVL729I2mc7aFnc4Wg",
+              "max_output_length": null,
+              "output": [
+                {
+                  "outcome": {
+                    "type": "exit",
+                    "exit_code": 0
+                  },
+                  "stderr": "",
+                  "stdout": "hello from shell\n"
+                }
+              ]
+            },
+            {
+              "id": "msg_0143deaa25eaf13e00698c5017fdf081969d04315df7b441c1",
+              "type": "message",
+              "status": "completed",
+              "content": [
+                {
+                  "type": "output_text",
+                  "annotations": [],
+                  "logprobs": [],
+                  "text": "hello from shell"
+                }
+              ],
+              "role": "assistant"
+            }
+          ],
+          "parallel_tool_calls": true,
+          "presence_penalty": 0.0,
+          "previous_response_id": null,
+          "prompt_cache_key": null,
+          "prompt_cache_retention": null,
+          "reasoning": {
+            "effort": "none",
+            "summary": null
+          },
+          "safety_identifier": null,
+          "service_tier": "default",
+          "store": true,
+          "temperature": 1.0,
+          "text": {
+            "format": {
+              "type": "text"
+            },
+            "verbosity": "medium"
+          },
+          "tool_choice": "auto",
+          "tools": [
+            {
+              "type": "shell",
+              "environment": {
+                "type": "container_reference",
+                "container_id": "cntr_698c5013c2288190bc626067f1abb059044b98a087359679"
+              }
+            }
+          ],
+          "top_logprobs": 0,
+          "top_p": 0.98,
+          "truncation": "disabled",
+          "usage": {
+            "input_tokens": 726,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 26,
+            "output_tokens_details": {
+              "reasoning_tokens": 19
+            },
+            "total_tokens": 752
+          },
+          "user": null,
+          "metadata": {}
+        }
+  recorded_at: Wed, 11 Feb 2026 09:47:05 GMT
+recorded_with: VCR 6.4.0

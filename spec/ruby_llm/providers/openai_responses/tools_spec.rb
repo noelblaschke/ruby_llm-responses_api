@@ -65,6 +65,21 @@ RSpec.describe RubyLLM::Providers::OpenAIResponses::Tools do
         expect(tool[:require_approval]).to eq('never')
       end
     end
+
+    describe '.apply_patch_tool' do
+      it 'creates apply_patch configuration' do
+        tool = tools_module.apply_patch_tool
+        expect(tool[:type]).to eq('apply_patch')
+      end
+    end
+
+    describe 'apply_patch passthrough via .tool_for' do
+      it 'passes apply_patch hash through as-is' do
+        patch = { type: 'apply_patch' }
+        result = tools_module.tool_for(patch)
+        expect(result).to eq(patch)
+      end
+    end
   end
 
   describe '.parse_tool_calls' do

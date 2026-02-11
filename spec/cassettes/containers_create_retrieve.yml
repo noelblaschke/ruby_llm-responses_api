@@ -1,0 +1,210 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.openai.com/v1/containers
+    body:
+      encoding: UTF-8
+      string: '{"name":"rubyllm-test-container","expires_after":{"anchor":"last_active_at","minutes":10}}'
+    headers:
+      User-Agent:
+      - Faraday v2.14.0
+      Authorization:
+      - Bearer <OPENAI_API_KEY>
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Feb 2026 09:47:13 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Openai-Version:
+      - '2020-10-01'
+      Openai-Organization:
+      - user-h7m2t30jnyqzec1thkvt5rcd
+      Openai-Project:
+      - proj_yBBvayevSgRR3SVjSmBgm0so
+      X-Request-Id:
+      - req_1925c3babc7440a9bab574741a0f9fbd
+      Openai-Processing-Ms:
+      - '7309'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=YZnO_K2aCw_d6Mkc4yIbqh4vHm2ZaQfzg0PudQdrONY-1770803225.6162353-1.0.1.1-h8DiYmTB5hQEHP2zWMX4jTqiWRLInWGjmTAmVxbzjIy6QR3wXdq2IOUoZJfU1HuMeMffhJPYo4sXSsf0RPp1ixhsNoheCtnZNpzFs09zc8e6LlwTADN7j3Lb97Nxfofd;
+        HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Wed, 11 Feb 2026
+        10:17:13 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      Cf-Ray:
+      - 9cc2ec401aeabf46-WAW
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "id": "cntr_698c501f50748190b8d8c6612a80d6e80f90f7464fd2f57d",
+          "object": "container",
+          "created_at": 1770803231,
+          "status": "running",
+          "expires_after": {
+            "anchor": "last_active_at",
+            "minutes": 10
+          },
+          "last_active_at": 1770803231,
+          "memory_limit": "1g",
+          "name": "rubyllm-test-container"
+        }
+  recorded_at: Wed, 11 Feb 2026 09:47:13 GMT
+- request:
+    method: get
+    uri: https://api.openai.com/v1/containers/cntr_698c501f50748190b8d8c6612a80d6e80f90f7464fd2f57d
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.0
+      Authorization:
+      - Bearer <OPENAI_API_KEY>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Feb 2026 09:47:13 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Openai-Version:
+      - '2020-10-01'
+      Openai-Organization:
+      - user-h7m2t30jnyqzec1thkvt5rcd
+      Openai-Project:
+      - proj_yBBvayevSgRR3SVjSmBgm0so
+      X-Request-Id:
+      - req_596b57297a494585859bdcbe1e17aa7e
+      Openai-Processing-Ms:
+      - '533'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=fH1jJBCR835Tlf0.3HNNE.hwM2bMZ9532JcmeLjZUzk-1770803233.1157053-1.0.1.1-tbQH8JB_X6Bg9jo4PSz6ZsMHZglQm5uo.8jpAgcQXoLSSXJ_FDKpHLk05cund99avf9CoXhbqlYGl7uEdOLmVPz1Lx2HbOMfHZZs0Giuxko22HWGG8TNglCigBq3s777;
+        HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Wed, 11 Feb 2026
+        10:17:13 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      Cf-Ray:
+      - 9cc2ec6efefa52df-WAW
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "id": "cntr_698c501f50748190b8d8c6612a80d6e80f90f7464fd2f57d",
+          "object": "container",
+          "created_at": 1770803231,
+          "status": "running",
+          "expires_after": {
+            "anchor": "last_active_at",
+            "minutes": 10
+          },
+          "last_active_at": 1770803232,
+          "memory_limit": "1g",
+          "name": "rubyllm-test-container"
+        }
+  recorded_at: Wed, 11 Feb 2026 09:47:13 GMT
+- request:
+    method: delete
+    uri: https://api.openai.com/v1/containers/cntr_698c501f50748190b8d8c6612a80d6e80f90f7464fd2f57d
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.0
+      Authorization:
+      - Bearer <OPENAI_API_KEY>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Feb 2026 09:47:14 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Openai-Version:
+      - '2020-10-01'
+      Openai-Organization:
+      - user-h7m2t30jnyqzec1thkvt5rcd
+      Openai-Project:
+      - proj_yBBvayevSgRR3SVjSmBgm0so
+      X-Request-Id:
+      - req_4bd7d364ecd44bf1ab16b502cc12a4ad
+      Openai-Processing-Ms:
+      - '55'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=59yVLbwpb0V5bCZy8fey.n7h5k1te7IuNc.kMD27tBM-1770803233.8402967-1.0.1.1-tFLrU1fq8KLDvZQLloxrei5lGrmr6qKErndslU7EjBHRsloUM_U2oF91aPghZhhf6D_UgaLt6gsSuqglEbuIe0Bpd6lwsdbZ769J0syyGX2Nmyr5_arHSNw1zCwSOpm2;
+        HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Wed, 11 Feb 2026
+        10:17:14 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      Cf-Ray:
+      - 9cc2ec737f1cad22-WAW
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "id": "cntr_698c501f50748190b8d8c6612a80d6e80f90f7464fd2f57d",
+          "object": "container.deleted",
+          "deleted": true
+        }
+  recorded_at: Wed, 11 Feb 2026 09:47:14 GMT
+recorded_with: VCR 6.4.0
