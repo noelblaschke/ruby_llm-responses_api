@@ -24,13 +24,15 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 03 Jan 2026 19:45:30 GMT
+      - Wed, 18 Feb 2026 10:25:43 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
+      Server:
+      - cloudflare
       X-Ratelimit-Limit-Requests:
       - '5000'
       X-Ratelimit-Limit-Tokens:
@@ -50,43 +52,38 @@ http_interactions:
       Openai-Project:
       - proj_yBBvayevSgRR3SVjSmBgm0so
       X-Request-Id:
-      - req_6edaafc53fed48bf86d1ae02f73d1a2c
+      - req_f4a1b90ec55e4da6afe1a36104021bde
       Openai-Processing-Ms:
-      - '2084'
-      X-Envoy-Upstream-Service-Time:
-      - '2089'
+      - '1855'
       Cf-Cache-Status:
       - DYNAMIC
       Set-Cookie:
-      - __cf_bm=ZZBAo666YjQpFEuPWCSyYhtmw22t6at6IzGO1w.5yXM-1767469530-1.0.1.1-3DxiBWqSVGdRR.HXSxQSaZdz81K2i5YecqgwVP4lWD0X9BhTGqXBA6IGLs4XJmL4jAMyDu6M1Sc.nzWllOJmiNhwn_h2WZeo6PpSY2cQMBU;
-        path=/; expires=Sat, 03-Jan-26 20:15:30 GMT; domain=.api.openai.com; HttpOnly;
-        Secure; SameSite=None
-      - _cfuvid=ZBBOiEx2OB9ZfAMzYVfvfxZ673ng5InM82SIEbpEaaA-1767469530432-0.0.1.1-604800000;
-        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
+      - __cf_bm=6Px2rwZfFgH711tx6BRJqokSM7pNhA5oyB1sIcK7OXA-1771410341.3940718-1.0.1.1-pB2y59gu8vPnncoCeNO3xyHMnyAiBbkYhYtQbBiQO0vkI7Qrr7QzpfVbqaoxyyunT2Gefp998h.swXz36qBotZfpu1TogtcF7uEVepPzQ8d2kEezKewzU5894_kP5cWu;
+        HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Wed, 18 Feb 2026
+        10:55:43 GMT
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       X-Content-Type-Options:
       - nosniff
-      Server:
-      - cloudflare
       Cf-Ray:
-      - 9b84ff271842ee3f-WAW
+      - 9cfcd269bf6beec1-WAW
       Alt-Svc:
       - h3=":443"; ma=86400
     body:
       encoding: ASCII-8BIT
       string: |-
         {
-          "id": "resp_0a178156a846c7a600695971d8461481948661368ebcff72fa",
+          "id": "resp_0b29d7b08e6b3a0400699593a57b28819790bb46850e9b7663",
           "object": "response",
-          "created_at": 1767469528,
+          "created_at": 1771410341,
           "status": "completed",
           "background": false,
           "billing": {
             "payer": "developer"
           },
-          "completed_at": 1767469530,
+          "completed_at": 1771410343,
           "error": null,
+          "frequency_penalty": 0.0,
           "incomplete_details": null,
           "instructions": null,
           "max_output_tokens": null,
@@ -94,7 +91,7 @@ http_interactions:
           "model": "gpt-4o-mini-2024-07-18",
           "output": [
             {
-              "id": "msg_0a178156a846c7a600695971d909a88194b1db3b07e8c64db3",
+              "id": "msg_0b29d7b08e6b3a0400699593a64af0819783170a31555f8067",
               "type": "message",
               "status": "completed",
               "content": [
@@ -102,13 +99,14 @@ http_interactions:
                   "type": "output_text",
                   "annotations": [],
                   "logprobs": [],
-                  "text": "The first image shows the Google logo, featuring colorful letters in blue, red, yellow, and green on a blue background. The second image displays the Python programming language logo, which includes an illustration of two intertwined snakes in blue and yellow with the word \"python\" in gray to the right."
+                  "text": "The first image shows the Google logo, characterized by colorful letters arranged in a playful font. The second image features the Python logo, which consists of two intertwined snake shapes in blue and yellow, alongside the word \"python\" in a modern font."
                 }
               ],
               "role": "assistant"
             }
           ],
           "parallel_tool_calls": true,
+          "presence_penalty": 0.0,
           "previous_response_id": null,
           "prompt_cache_key": null,
           "prompt_cache_retention": null,
@@ -136,14 +134,14 @@ http_interactions:
             "input_tokens_details": {
               "cached_tokens": 0
             },
-            "output_tokens": 60,
+            "output_tokens": 50,
             "output_tokens_details": {
               "reasoning_tokens": 0
             },
-            "total_tokens": 28409
+            "total_tokens": 28399
           },
           "user": null,
           "metadata": {}
         }
-  recorded_at: Sat, 03 Jan 2026 19:45:30 GMT
+  recorded_at: Wed, 18 Feb 2026 10:25:43 GMT
 recorded_with: VCR 6.4.0

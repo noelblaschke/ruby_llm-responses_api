@@ -23,7 +23,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 11 Feb 2026 09:47:13 GMT
+      - Wed, 18 Feb 2026 10:25:10 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -39,43 +39,43 @@ http_interactions:
       Openai-Project:
       - proj_yBBvayevSgRR3SVjSmBgm0so
       X-Request-Id:
-      - req_1925c3babc7440a9bab574741a0f9fbd
+      - req_6a17021dafe74f958c673f2e78ca686c
       Openai-Processing-Ms:
-      - '7309'
+      - '9489'
       Cf-Cache-Status:
       - DYNAMIC
       Set-Cookie:
-      - __cf_bm=YZnO_K2aCw_d6Mkc4yIbqh4vHm2ZaQfzg0PudQdrONY-1770803225.6162353-1.0.1.1-h8DiYmTB5hQEHP2zWMX4jTqiWRLInWGjmTAmVxbzjIy6QR3wXdq2IOUoZJfU1HuMeMffhJPYo4sXSsf0RPp1ixhsNoheCtnZNpzFs09zc8e6LlwTADN7j3Lb97Nxfofd;
-        HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Wed, 11 Feb 2026
-        10:17:13 GMT
+      - __cf_bm=gr2W9toV_xlkvGUN.Cgr6_rwOF1W8wMBd1t7ZtJpMWM-1771410300.4304297-1.0.1.1-zsdcJ_6a0jVxdOYU43eya9unSVjmtpuL9UD3AWlcxrRATMmgRp7f1xu7E7tUYsSjodV0utHvzFgWE7b7huT_M4tW00irgY2iVfTBXK4P0f1HkObSJHeRrwOEPGVU.VrP;
+        HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Wed, 18 Feb 2026
+        10:55:10 GMT
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       X-Content-Type-Options:
       - nosniff
       Cf-Ray:
-      - 9cc2ec401aeabf46-WAW
+      - 9cfcd169abb1b623-WAW
       Alt-Svc:
       - h3=":443"; ma=86400
     body:
       encoding: ASCII-8BIT
       string: |-
         {
-          "id": "cntr_698c501f50748190b8d8c6612a80d6e80f90f7464fd2f57d",
+          "id": "cntr_69959384c16c8190bf2db63b36520d7d0ec73f725a348b2e",
           "object": "container",
-          "created_at": 1770803231,
+          "created_at": 1771410308,
           "status": "running",
           "expires_after": {
             "anchor": "last_active_at",
             "minutes": 10
           },
-          "last_active_at": 1770803231,
+          "last_active_at": 1771410308,
           "memory_limit": "1g",
           "name": "rubyllm-test-container"
         }
-  recorded_at: Wed, 11 Feb 2026 09:47:13 GMT
+  recorded_at: Wed, 18 Feb 2026 10:25:10 GMT
 - request:
     method: get
-    uri: https://api.openai.com/v1/containers/cntr_698c501f50748190b8d8c6612a80d6e80f90f7464fd2f57d
+    uri: https://api.openai.com/v1/containers/cntr_69959384c16c8190bf2db63b36520d7d0ec73f725a348b2e
     body:
       encoding: US-ASCII
       string: ''
@@ -94,7 +94,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 11 Feb 2026 09:47:13 GMT
+      - Wed, 18 Feb 2026 10:25:11 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -110,43 +110,43 @@ http_interactions:
       Openai-Project:
       - proj_yBBvayevSgRR3SVjSmBgm0so
       X-Request-Id:
-      - req_596b57297a494585859bdcbe1e17aa7e
+      - req_66dbf953ee22471fa4e6ee703700c507
       Openai-Processing-Ms:
-      - '533'
+      - '482'
       Cf-Cache-Status:
       - DYNAMIC
       Set-Cookie:
-      - __cf_bm=fH1jJBCR835Tlf0.3HNNE.hwM2bMZ9532JcmeLjZUzk-1770803233.1157053-1.0.1.1-tbQH8JB_X6Bg9jo4PSz6ZsMHZglQm5uo.8jpAgcQXoLSSXJ_FDKpHLk05cund99avf9CoXhbqlYGl7uEdOLmVPz1Lx2HbOMfHZZs0Giuxko22HWGG8TNglCigBq3s777;
-        HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Wed, 11 Feb 2026
-        10:17:13 GMT
+      - __cf_bm=uDZfQaErxEbOUB9Im4WnOy.JdiGL5i8wPYXoKC41DHM-1771410310.530173-1.0.1.1-cXAHSlDVOHE5VS0zcSnX.6WWSdqDn08HtnHp1v2RXIx..ddl.KybhcTQHj3fxOEN1hYrnbEBCwhqpnF3fEIm0m3KmVdD5gjD1DXn5Fh1yGElL1BWfoOAlsr5MA.BPa2B;
+        HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Wed, 18 Feb 2026
+        10:55:11 GMT
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       X-Content-Type-Options:
       - nosniff
       Cf-Ray:
-      - 9cc2ec6efefa52df-WAW
+      - 9cfcd1a8cfba3552-WAW
       Alt-Svc:
       - h3=":443"; ma=86400
     body:
       encoding: ASCII-8BIT
       string: |-
         {
-          "id": "cntr_698c501f50748190b8d8c6612a80d6e80f90f7464fd2f57d",
+          "id": "cntr_69959384c16c8190bf2db63b36520d7d0ec73f725a348b2e",
           "object": "container",
-          "created_at": 1770803231,
+          "created_at": 1771410308,
           "status": "running",
           "expires_after": {
             "anchor": "last_active_at",
             "minutes": 10
           },
-          "last_active_at": 1770803232,
+          "last_active_at": 1771410310,
           "memory_limit": "1g",
           "name": "rubyllm-test-container"
         }
-  recorded_at: Wed, 11 Feb 2026 09:47:13 GMT
+  recorded_at: Wed, 18 Feb 2026 10:25:11 GMT
 - request:
     method: delete
-    uri: https://api.openai.com/v1/containers/cntr_698c501f50748190b8d8c6612a80d6e80f90f7464fd2f57d
+    uri: https://api.openai.com/v1/containers/cntr_69959384c16c8190bf2db63b36520d7d0ec73f725a348b2e
     body:
       encoding: US-ASCII
       string: ''
@@ -165,7 +165,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 11 Feb 2026 09:47:14 GMT
+      - Wed, 18 Feb 2026 10:25:11 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -181,30 +181,30 @@ http_interactions:
       Openai-Project:
       - proj_yBBvayevSgRR3SVjSmBgm0so
       X-Request-Id:
-      - req_4bd7d364ecd44bf1ab16b502cc12a4ad
+      - req_6fb6196a8cc54e8ca40a2c7adc01cba7
       Openai-Processing-Ms:
-      - '55'
+      - '53'
       Cf-Cache-Status:
       - DYNAMIC
       Set-Cookie:
-      - __cf_bm=59yVLbwpb0V5bCZy8fey.n7h5k1te7IuNc.kMD27tBM-1770803233.8402967-1.0.1.1-tFLrU1fq8KLDvZQLloxrei5lGrmr6qKErndslU7EjBHRsloUM_U2oF91aPghZhhf6D_UgaLt6gsSuqglEbuIe0Bpd6lwsdbZ769J0syyGX2Nmyr5_arHSNw1zCwSOpm2;
-        HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Wed, 11 Feb 2026
-        10:17:14 GMT
+      - __cf_bm=ulQ4F.tpklR8YHvlUr1uboL__mYXp2KULp11bvNZWOw-1771410311.6241019-1.0.1.1-ZhxN1Fa.7hvL2u_sLktMfn6WyeEdv62lCV5Pm22Yak7s76JoOj51TN52A1UUySTGSYdeikNgIiMzErWyp9441ghkDXIwK6GpiFEJcJ0iLeBOtHp4lj_4t0GkioEf59yA;
+        HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Wed, 18 Feb 2026
+        10:55:11 GMT
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       X-Content-Type-Options:
       - nosniff
       Cf-Ray:
-      - 9cc2ec737f1cad22-WAW
+      - 9cfcd1afaa850282-WAW
       Alt-Svc:
       - h3=":443"; ma=86400
     body:
       encoding: ASCII-8BIT
       string: |-
         {
-          "id": "cntr_698c501f50748190b8d8c6612a80d6e80f90f7464fd2f57d",
+          "id": "cntr_69959384c16c8190bf2db63b36520d7d0ec73f725a348b2e",
           "object": "container.deleted",
           "deleted": true
         }
-  recorded_at: Wed, 11 Feb 2026 09:47:14 GMT
+  recorded_at: Wed, 18 Feb 2026 10:25:11 GMT
 recorded_with: VCR 6.4.0

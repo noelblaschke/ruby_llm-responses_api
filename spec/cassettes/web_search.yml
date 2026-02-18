@@ -24,13 +24,15 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 03 Jan 2026 19:45:46 GMT
+      - Wed, 18 Feb 2026 10:25:41 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
+      Server:
+      - cloudflare
       X-Ratelimit-Limit-Requests:
       - '5000'
       X-Ratelimit-Limit-Tokens:
@@ -50,43 +52,38 @@ http_interactions:
       Openai-Project:
       - proj_yBBvayevSgRR3SVjSmBgm0so
       X-Request-Id:
-      - req_2c2daca2bc0d4290be713622b2f8c972
+      - req_75fddbfa111c48438555e39619a84c40
       Openai-Processing-Ms:
-      - '2229'
-      X-Envoy-Upstream-Service-Time:
-      - '2233'
+      - '3100'
       Cf-Cache-Status:
       - DYNAMIC
       Set-Cookie:
-      - __cf_bm=84N8KOoSwpb111iKsvi5L1Hy7FZCmZePaxkxHuywJvg-1767469546-1.0.1.1-yWSLNKcY9hdg9.4LE1pNp1nnkL9_TDjzXK3FNPq6rPR7OWj3tr3c2KBr_zn0fdKHkeF8ZpwOO1li0JvizFdS6V6RQPyM.UrBNFiWAUtWzx8;
-        path=/; expires=Sat, 03-Jan-26 20:15:46 GMT; domain=.api.openai.com; HttpOnly;
-        Secure; SameSite=None
-      - _cfuvid=HyOy9lvkEXs2wR_0pkxjC1JiGyAtUZwdFqpsSFP63AY-1767469546615-0.0.1.1-604800000;
-        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
+      - __cf_bm=tLaRNfcgyqC5SaFex56Il8hqp00iHbXvgcU3UsWZ27E-1771410337.736692-1.0.1.1-bUvU9oF4Abvnxu_V3NFP9B4k9xMs525A0Es9isigeb9RjfjAFtdh5hUe585Yr5b6z0qHROoXGo2Jpf2o516ICeRg1Np0SDD1MyX3bDjROaJ2QiYaS1LOSQdEeH5qHBWF;
+        HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Wed, 18 Feb 2026
+        10:55:41 GMT
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       X-Content-Type-Options:
       - nosniff
-      Server:
-      - cloudflare
       Cf-Ray:
-      - 9b84ff8b6edebf2a-WAW
+      - 9cfcd252dea82a51-WAW
       Alt-Svc:
       - h3=":443"; ma=86400
     body:
       encoding: ASCII-8BIT
       string: |-
         {
-          "id": "resp_0da17b94101be23f00695971e853588193b80959f1b9fbf85c",
+          "id": "resp_07dd35ead0fa9caa00699593a22e4c8194a4e5b44128375c84",
           "object": "response",
-          "created_at": 1767469544,
+          "created_at": 1771410338,
           "status": "completed",
           "background": false,
           "billing": {
             "payer": "developer"
           },
-          "completed_at": 1767469546,
+          "completed_at": 1771410341,
           "error": null,
+          "frequency_penalty": 0.0,
           "incomplete_details": null,
           "instructions": null,
           "max_output_tokens": null,
@@ -94,16 +91,19 @@ http_interactions:
           "model": "gpt-4o-mini-2024-07-18",
           "output": [
             {
-              "id": "ws_0da17b94101be23f00695971e8bebc8193a450402effc3c2e1",
+              "id": "ws_07dd35ead0fa9caa00699593a332348194bc96c312f6da67b6",
               "type": "web_search_call",
               "status": "completed",
               "action": {
                 "type": "search",
+                "queries": [
+                  "current population of Tokyo 2023"
+                ],
                 "query": "current population of Tokyo 2023"
               }
             },
             {
-              "id": "msg_0da17b94101be23f00695971e990d48193a7dc41732619d1dd",
+              "id": "msg_07dd35ead0fa9caa00699593a437048194a47eca379ad56403",
               "type": "message",
               "status": "completed",
               "content": [
@@ -112,27 +112,28 @@ http_interactions:
                   "annotations": [
                     {
                       "type": "url_citation",
-                      "end_index": 174,
-                      "start_index": 83,
-                      "title": "Demographics of Tokyo",
-                      "url": "https://en.wikipedia.org/wiki/Demographics_of_Tokyo?utm_source=openai"
+                      "end_index": 254,
+                      "start_index": 104,
+                      "title": "Tokyo Loses Title Of World\u2019s Most Populous City, According To UN",
+                      "url": "https://www.forbes.com/sites/duncanmadden/2025/11/28/tokyo-loses-title-of-worlds-most-populous-city-according-to-un/?utm_source=openai"
                     },
                     {
                       "type": "url_citation",
-                      "end_index": 442,
-                      "start_index": 322,
+                      "end_index": 547,
+                      "start_index": 427,
                       "title": "Tokyo, Japan Metro Area Population | Historical Data | Chart | 1950-2025 | MacroTrends",
                       "url": "https://www.macrotrends.net/datasets/global-metrics/cities/21671/tokyo/population?utm_source=openai"
                     }
                   ],
                   "logprobs": [],
-                  "text": "As of 2025, Tokyo's population is estimated to be approximately 14 million people. ([en.wikipedia.org](https://en.wikipedia.org/wiki/Demographics_of_Tokyo?utm_source=openai)) However, when considering the broader Tokyo metropolitan area, which includes surrounding cities and suburbs, the population is around 37 million. ([macrotrends.net](https://www.macrotrends.net/datasets/global-metrics/cities/21671/tokyo/population?utm_source=openai)) "
+                  "text": "As of 2025, the Tokyo metropolitan area has an estimated population of approximately 33 million people. ([forbes.com](https://www.forbes.com/sites/duncanmadden/2025/11/28/tokyo-loses-title-of-worlds-most-populous-city-according-to-un/?utm_source=openai)) This figure includes the city of Tokyo and its surrounding suburbs. It's important to note that Tokyo's population has been experiencing a gradual decline in recent years. ([macrotrends.net](https://www.macrotrends.net/datasets/global-metrics/cities/21671/tokyo/population?utm_source=openai)) "
                 }
               ],
               "role": "assistant"
             }
           ],
           "parallel_tool_calls": true,
+          "presence_penalty": 0.0,
           "previous_response_id": null,
           "prompt_cache_key": null,
           "prompt_cache_retention": null,
@@ -172,14 +173,14 @@ http_interactions:
             "input_tokens_details": {
               "cached_tokens": 0
             },
-            "output_tokens": 122,
+            "output_tokens": 152,
             "output_tokens_details": {
               "reasoning_tokens": 0
             },
-            "total_tokens": 437
+            "total_tokens": 467
           },
           "user": null,
           "metadata": {}
         }
-  recorded_at: Sat, 03 Jan 2026 19:45:46 GMT
+  recorded_at: Wed, 18 Feb 2026 10:25:41 GMT
 recorded_with: VCR 6.4.0

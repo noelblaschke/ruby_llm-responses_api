@@ -24,13 +24,15 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 03 Jan 2026 19:45:41 GMT
+      - Wed, 18 Feb 2026 10:26:01 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
+      Server:
+      - cloudflare
       X-Ratelimit-Limit-Requests:
       - '5000'
       X-Ratelimit-Limit-Tokens:
@@ -50,43 +52,38 @@ http_interactions:
       Openai-Project:
       - proj_yBBvayevSgRR3SVjSmBgm0so
       X-Request-Id:
-      - req_14250c042fbf4e7f936b69d1ffbd93f9
+      - req_cc3a03e46c734daab3641df68b852b45
       Openai-Processing-Ms:
-      - '1323'
-      X-Envoy-Upstream-Service-Time:
-      - '1327'
+      - '1848'
       Cf-Cache-Status:
       - DYNAMIC
       Set-Cookie:
-      - __cf_bm=gBkiwmk0SVzRU4jN1Fx8fjrTjCrV.G8BOuMZlwZs6j0-1767469541-1.0.1.1-VpFs0eFRbZS2Xc7fyVFhRsbqeL57IxncUkBsyKuFYf8zpmXV4zdeiqC0DD4ulrylxVBPx6y2SmFN20P15iYgxMLJ.Xfx08XRUzdLozdQkZ0;
-        path=/; expires=Sat, 03-Jan-26 20:15:41 GMT; domain=.api.openai.com; HttpOnly;
-        Secure; SameSite=None
-      - _cfuvid=mQTDg3FgchU3_2JUtAd6PYEviiJ_AG.gfFqXpHfw4zo-1767469541443-0.0.1.1-604800000;
-        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
+      - __cf_bm=hWLoM35RwWyCXMZh8aZgCvihJDT3vyUVawYRJHzey9Q-1771410359.8796315-1.0.1.1-YAQX9dtlEA5W.0hR9Ys3yeiMl9dQg06ecWrWSHC98LtwZBsNCGv70tsOOEJaJmvf4UKfv470o5u5nE51MrHpaFwPukAw5zbBofcxrUsGe_3uL_FhWnnRFuEBg9Z13_VE;
+        HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Wed, 18 Feb 2026
+        10:56:01 GMT
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       X-Content-Type-Options:
       - nosniff
-      Server:
-      - cloudflare
       Cf-Ray:
-      - 9b84ff70b95d348c-WAW
+      - 9cfcd2dd3a2bbf7b-WAW
       Alt-Svc:
       - h3=":443"; ma=86400
     body:
       encoding: ASCII-8BIT
       string: |-
         {
-          "id": "resp_081f144b4acd139e00695971e411a0819692adb6dcf1f06493",
+          "id": "resp_0f11b4504d24fe8300699593b7f8348194a8b24668de996c5d",
           "object": "response",
-          "created_at": 1767469540,
+          "created_at": 1771410359,
           "status": "completed",
           "background": false,
           "billing": {
             "payer": "developer"
           },
-          "completed_at": 1767469541,
+          "completed_at": 1771410361,
           "error": null,
+          "frequency_penalty": 0.0,
           "incomplete_details": null,
           "instructions": null,
           "max_output_tokens": null,
@@ -94,7 +91,7 @@ http_interactions:
           "model": "gpt-4o-mini-2024-07-18",
           "output": [
             {
-              "id": "msg_081f144b4acd139e00695971e4565081969449966baef809cc",
+              "id": "msg_0f11b4504d24fe8300699593b897f48194a08601a4f7888321",
               "type": "message",
               "status": "completed",
               "content": [
@@ -102,13 +99,14 @@ http_interactions:
                   "type": "output_text",
                   "annotations": [],
                   "logprobs": [],
-                  "text": "The character you're referring to is the backslash (`\\`). It is commonly used in file paths on Windows operating systems to separate directory levels. For example, a file path might look like `C:\\Users\\Username\\Documents\\File.txt`."
+                  "text": "The character `\\` is called a backslash. In Windows file paths, it is used to separate directories, for example: `C:\\Program Files\\Example`."
                 }
               ],
               "role": "assistant"
             }
           ],
           "parallel_tool_calls": true,
+          "presence_penalty": 0.0,
           "previous_response_id": null,
           "prompt_cache_key": null,
           "prompt_cache_retention": null,
@@ -136,14 +134,14 @@ http_interactions:
             "input_tokens_details": {
               "cached_tokens": 0
             },
-            "output_tokens": 49,
+            "output_tokens": 35,
             "output_tokens_details": {
               "reasoning_tokens": 0
             },
-            "total_tokens": 74
+            "total_tokens": 60
           },
           "user": null,
           "metadata": {}
         }
-  recorded_at: Sat, 03 Jan 2026 19:45:41 GMT
+  recorded_at: Wed, 18 Feb 2026 10:26:01 GMT
 recorded_with: VCR 6.4.0

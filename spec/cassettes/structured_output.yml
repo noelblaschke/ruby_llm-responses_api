@@ -24,13 +24,15 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 03 Jan 2026 19:45:26 GMT
+      - Wed, 18 Feb 2026 10:25:46 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
+      Server:
+      - cloudflare
       X-Ratelimit-Limit-Requests:
       - '5000'
       X-Ratelimit-Limit-Tokens:
@@ -50,43 +52,38 @@ http_interactions:
       Openai-Project:
       - proj_yBBvayevSgRR3SVjSmBgm0so
       X-Request-Id:
-      - req_7af6e6aaefbd40f385263cedcf81a4d2
+      - req_c9d475f06a0a489cbadbd8ad9e2862f1
       Openai-Processing-Ms:
-      - '1888'
-      X-Envoy-Upstream-Service-Time:
-      - '1893'
+      - '946'
       Cf-Cache-Status:
       - DYNAMIC
       Set-Cookie:
-      - __cf_bm=h4AkJZ5cdzlrLAjC9EhiOJOQnzGNGnM4pxSiEZ9.UGU-1767469526-1.0.1.1-nXsOVu6RvhY3vXuYlKPoEtDA3wn54AMH0iAPeeRLjqlh8GFdO9eU9vSjjXKDjcs3q2rOawfXWymYo7mIAC9seQiePCRLLcYqhmTW8nkuuZI;
-        path=/; expires=Sat, 03-Jan-26 20:15:26 GMT; domain=.api.openai.com; HttpOnly;
-        Secure; SameSite=None
-      - _cfuvid=FU.tIj.ixK1g_KuQ150uf_jCzVvXWmuSGhSiL.6z2aM-1767469526871-0.0.1.1-604800000;
-        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
+      - __cf_bm=ID3GJJIPIhAouirQhgUJAf6EoUDlAiPt09RSVg.FXGs-1771410344.9677775-1.0.1.1-CpzKXDCJFYsv6P2Xdkapv45gvrThX2D1TaGgXNGDyacjwb8ckwfPqYo6qF3rXyg5BwvW8ZYCHWmWmF0nBJ.BvRTGsjOI9XyNewuBHUkR_lpYZp5wjeddCK6MGb7_IvOb;
+        HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Wed, 18 Feb 2026
+        10:55:46 GMT
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       X-Content-Type-Options:
       - nosniff
-      Server:
-      - cloudflare
       Cf-Ray:
-      - 9b84ff1029a10562-WAW
+      - 9cfcd2800c4cc00f-WAW
       Alt-Svc:
       - h3=":443"; ma=86400
     body:
       encoding: ASCII-8BIT
       string: |-
         {
-          "id": "resp_06f6b7a552a1380f00695971d4eb608195a2c8700c2c25f040",
+          "id": "resp_0faee227b4be81d800699593a910288195947cf5e437dc3f96",
           "object": "response",
-          "created_at": 1767469524,
+          "created_at": 1771410345,
           "status": "completed",
           "background": false,
           "billing": {
             "payer": "developer"
           },
-          "completed_at": 1767469526,
+          "completed_at": 1771410345,
           "error": null,
+          "frequency_penalty": 0.0,
           "incomplete_details": null,
           "instructions": null,
           "max_output_tokens": null,
@@ -94,7 +91,7 @@ http_interactions:
           "model": "gpt-4o-mini-2024-07-18",
           "output": [
             {
-              "id": "msg_06f6b7a552a1380f00695971d5fd488195b554f9bc45d0993f",
+              "id": "msg_0faee227b4be81d800699593a984548195b89391638aa53122",
               "type": "message",
               "status": "completed",
               "content": [
@@ -102,13 +99,14 @@ http_interactions:
                   "type": "output_text",
                   "annotations": [],
                   "logprobs": [],
-                  "text": "{\"name\":\"Lila Thornton\",\"age\":29,\"city\":\"Savannah\"}"
+                  "text": "{\"name\":\"Lila Morgan\",\"age\":29,\"city\":\"Austin\"}"
                 }
               ],
               "role": "assistant"
             }
           ],
           "parallel_tool_calls": true,
+          "presence_penalty": 0.0,
           "previous_response_id": null,
           "prompt_cache_key": null,
           "prompt_cache_retention": null,
@@ -159,14 +157,14 @@ http_interactions:
             "input_tokens_details": {
               "cached_tokens": 0
             },
-            "output_tokens": 17,
+            "output_tokens": 16,
             "output_tokens_details": {
               "reasoning_tokens": 0
             },
-            "total_tokens": 72
+            "total_tokens": 71
           },
           "user": null,
           "metadata": {}
         }
-  recorded_at: Sat, 03 Jan 2026 19:45:26 GMT
+  recorded_at: Wed, 18 Feb 2026 10:25:46 GMT
 recorded_with: VCR 6.4.0

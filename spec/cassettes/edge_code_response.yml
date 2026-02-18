@@ -24,13 +24,15 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 03 Jan 2026 19:45:39 GMT
+      - Wed, 18 Feb 2026 10:26:06 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
+      Server:
+      - cloudflare
       X-Ratelimit-Limit-Requests:
       - '5000'
       X-Ratelimit-Limit-Tokens:
@@ -50,43 +52,38 @@ http_interactions:
       Openai-Project:
       - proj_yBBvayevSgRR3SVjSmBgm0so
       X-Request-Id:
-      - req_67e309cb758f417b8173dead3e93427f
+      - req_720fc04bb13741d19635e14e1f5d00cb
       Openai-Processing-Ms:
-      - '1404'
-      X-Envoy-Upstream-Service-Time:
-      - '1407'
+      - '883'
       Cf-Cache-Status:
       - DYNAMIC
       Set-Cookie:
-      - __cf_bm=jHSkq5e0Um.PYns5RpRHHh09pNGLOoqstyD8FWwueGs-1767469539-1.0.1.1-uksAugxMm8tXT8jZJdZGi6GlWKkhwi_m.zDzxpgsRMPdZT9nu5BUVMl7D8paC_wgYaw_seDFm4H8_4R7olE2QvX6ElG7EsXXynHXKyELcIM;
-        path=/; expires=Sat, 03-Jan-26 20:15:39 GMT; domain=.api.openai.com; HttpOnly;
-        Secure; SameSite=None
-      - _cfuvid=5Re2_QbBBGtwwbgYvb0lKaYJ3va0mewD46oguzrqIXA-1767469539903-0.0.1.1-604800000;
-        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
+      - __cf_bm=GLS6sl31O1INDcI2rf0pxUZHNda8efd.NQoxPZFNwDg-1771410365.150844-1.0.1.1-QmsQBgA2OSt.qzAMIjOPf3lO6k1oUuGHg1hndK_zlDmJ4dbVYZo98GoYrmiPn6IDZuKbvkY7Dx6ej.5hJcCbPDwMqs_pR5sU88krBSWZK8koRF6yE7Oj6wNnUIeUsIsB;
+        HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Wed, 18 Feb 2026
+        10:56:06 GMT
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       X-Content-Type-Options:
       - nosniff
-      Server:
-      - cloudflare
       Cf-Ray:
-      - 9b84ff669a560b98-WAW
+      - 9cfcd2fe2a23bbc9-WAW
       Alt-Svc:
       - h3=":443"; ma=86400
     body:
       encoding: ASCII-8BIT
       string: |-
         {
-          "id": "resp_0cdac4617e8b9ad700695971e270008190ad1d42c1ac34eb02",
+          "id": "resp_0e6215ccb0462b5200699593bd3d4c81948a777c6ed4daf611",
           "object": "response",
-          "created_at": 1767469538,
+          "created_at": 1771410365,
           "status": "completed",
           "background": false,
           "billing": {
             "payer": "developer"
           },
-          "completed_at": 1767469539,
+          "completed_at": 1771410366,
           "error": null,
+          "frequency_penalty": 0.0,
           "incomplete_details": null,
           "instructions": null,
           "max_output_tokens": null,
@@ -94,7 +91,7 @@ http_interactions:
           "model": "gpt-4o-mini-2024-07-18",
           "output": [
             {
-              "id": "msg_0cdac4617e8b9ad700695971e2cc6081908d41b3e0adda5dfc",
+              "id": "msg_0e6215ccb0462b5200699593bd724c8194981934d1969bac38",
               "type": "message",
               "status": "completed",
               "content": [
@@ -102,13 +99,14 @@ http_interactions:
                   "type": "output_text",
                   "annotations": [],
                   "logprobs": [],
-                  "text": "Here's a simple Ruby one-liner to print \"Hello, World!\":\n\n```ruby\nputs 'Hello, World!'\n``` \n\nYou can run this in any Ruby environment or save it in a `.rb` file and execute it with `ruby filename.rb`."
+                  "text": "Sure! Here's a simple one-liner in Ruby to print \"Hello, World!\":\n\n```ruby\nputs 'Hello, World!'\n```"
                 }
               ],
               "role": "assistant"
             }
           ],
           "parallel_tool_calls": true,
+          "presence_penalty": 0.0,
           "previous_response_id": null,
           "prompt_cache_key": null,
           "prompt_cache_retention": null,
@@ -136,14 +134,14 @@ http_interactions:
             "input_tokens_details": {
               "cached_tokens": 0
             },
-            "output_tokens": 53,
+            "output_tokens": 29,
             "output_tokens_details": {
               "reasoning_tokens": 0
             },
-            "total_tokens": 68
+            "total_tokens": 44
           },
           "user": null,
           "metadata": {}
         }
-  recorded_at: Sat, 03 Jan 2026 19:45:39 GMT
+  recorded_at: Wed, 18 Feb 2026 10:26:06 GMT
 recorded_with: VCR 6.4.0

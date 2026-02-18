@@ -24,13 +24,15 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 03 Jan 2026 19:45:43 GMT
+      - Wed, 18 Feb 2026 10:25:59 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
+      Server:
+      - cloudflare
       X-Ratelimit-Limit-Requests:
       - '5000'
       X-Ratelimit-Limit-Tokens:
@@ -50,43 +52,38 @@ http_interactions:
       Openai-Project:
       - proj_yBBvayevSgRR3SVjSmBgm0so
       X-Request-Id:
-      - req_2f35c8ca24a54e47bcb2168869609959
+      - req_8fb58ca16d9f4ba7b1b9ee50534312e0
       Openai-Processing-Ms:
-      - '1005'
-      X-Envoy-Upstream-Service-Time:
-      - '1009'
+      - '707'
       Cf-Cache-Status:
       - DYNAMIC
       Set-Cookie:
-      - __cf_bm=wZpmtmI3ZKpuM8FE_K8P8ig5RTYI3SJkmT_Szfya3zI-1767469543-1.0.1.1-JhTCOZ5ysi9BUtcsNQJ05WMiWpBlZLOaHnSQuDmlcBJC7aiqAT65NeWNipbJZNNNB1vol1.7_oaNStj736FzaqK5WFGejPTV.xaXrLKUbBM;
-        path=/; expires=Sat, 03-Jan-26 20:15:43 GMT; domain=.api.openai.com; HttpOnly;
-        Secure; SameSite=None
-      - _cfuvid=RqzgSVl.VSeCCHM4g13F.kserqz9REO6K.stGwUVj_E-1767469543450-0.0.1.1-604800000;
-        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
+      - __cf_bm=ps2PMAOsWrImrmp0T2JtLMpwy0FSm3ZTGyrS40peHL8-1771410358.974513-1.0.1.1-Qktb5BvGWfE5NdLfH6H37o6lr5Xi9LXt1f36.prUVOL3kiVQlQ_OkJX7VxM87QddZ6V6RBkcsnqcX2oehdvjCsuSDxLYV1lVRo9adD2yxWlbeREl68AlbttwIyVIJZ9T;
+        HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Wed, 18 Feb 2026
+        10:55:59 GMT
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       X-Content-Type-Options:
       - nosniff
-      Server:
-      - cloudflare
       Cf-Ray:
-      - 9b84ff7f5f695906-WAW
+      - 9cfcd2d79810f499-WAW
       Alt-Svc:
       - h3=":443"; ma=86400
     body:
       encoding: ASCII-8BIT
       string: |-
         {
-          "id": "resp_09cc73049d5214da00695971e6618081939164c2167f4ee092",
+          "id": "resp_0e206296d30601b100699593b70f84819392f6fa66cd3e8429",
           "object": "response",
-          "created_at": 1767469542,
+          "created_at": 1771410359,
           "status": "completed",
           "background": false,
           "billing": {
             "payer": "developer"
           },
-          "completed_at": 1767469543,
+          "completed_at": 1771410359,
           "error": null,
+          "frequency_penalty": 0.0,
           "incomplete_details": null,
           "instructions": null,
           "max_output_tokens": null,
@@ -94,7 +91,7 @@ http_interactions:
           "model": "gpt-4o-mini-2024-07-18",
           "output": [
             {
-              "id": "msg_09cc73049d5214da00695971e6a6748193805092fe4014a230",
+              "id": "msg_0e206296d30601b100699593b76b588193b17b13b38e6b2597",
               "type": "message",
               "status": "completed",
               "content": [
@@ -102,13 +99,14 @@ http_interactions:
                   "type": "output_text",
                   "annotations": [],
                   "logprobs": [],
-                  "text": "Inside the quotes, there is the text: **\"hello world\"**. It consists of the words \"hello\" and \"world,\" separated by a space."
+                  "text": "The text inside the quotes is \"hello world\"."
                 }
               ],
               "role": "assistant"
             }
           ],
           "parallel_tool_calls": true,
+          "presence_penalty": 0.0,
           "previous_response_id": null,
           "prompt_cache_key": null,
           "prompt_cache_retention": null,
@@ -136,14 +134,14 @@ http_interactions:
             "input_tokens_details": {
               "cached_tokens": 0
             },
-            "output_tokens": 34,
+            "output_tokens": 11,
             "output_tokens_details": {
               "reasoning_tokens": 0
             },
-            "total_tokens": 51
+            "total_tokens": 28
           },
           "user": null,
           "metadata": {}
         }
-  recorded_at: Sat, 03 Jan 2026 19:45:43 GMT
+  recorded_at: Wed, 18 Feb 2026 10:25:59 GMT
 recorded_with: VCR 6.4.0

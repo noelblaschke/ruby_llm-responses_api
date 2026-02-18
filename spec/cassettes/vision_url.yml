@@ -24,13 +24,15 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 03 Jan 2026 19:45:28 GMT
+      - Wed, 18 Feb 2026 10:25:44 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
+      Server:
+      - cloudflare
       X-Ratelimit-Limit-Requests:
       - '5000'
       X-Ratelimit-Limit-Tokens:
@@ -50,43 +52,38 @@ http_interactions:
       Openai-Project:
       - proj_yBBvayevSgRR3SVjSmBgm0so
       X-Request-Id:
-      - req_9c302a0fcd6e458a8a7b6937e7f9ebde
+      - req_cd8a41e9a04a41d5814bf63fd29ec2d3
       Openai-Processing-Ms:
-      - '1055'
-      X-Envoy-Upstream-Service-Time:
-      - '1058'
+      - '1316'
       Cf-Cache-Status:
       - DYNAMIC
       Set-Cookie:
-      - __cf_bm=lwtxggwtvuvLL4YhpgS87uqF0TnHtQTrAfjv.cc.CAI-1767469528-1.0.1.1-LzrS9rOxiYvn7V10EdkJAIFHrEFWoD5JsHse15Vxsqwsy6RkPLoci6DI3_X.iVZ3aKVkiG0m_pp86NYIz7L5rIH53rWoxRMzsnjny2NyVTM;
-        path=/; expires=Sat, 03-Jan-26 20:15:28 GMT; domain=.api.openai.com; HttpOnly;
-        Secure; SameSite=None
-      - _cfuvid=GBDOD8hhfcHpQp5CfnmOuPa7LKsXU_F.8c0bPsO_ERg-1767469528123-0.0.1.1-604800000;
-        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
+      - __cf_bm=eu5dBRi_pTQMafFa5ye7qlsY15H2RYScJt0g34XftDI-1771410343.4592984-1.0.1.1-PbB.Q86wgr3i2roKhNnUFpTU_9Zsv4vHYUlw3T2vIVTNGaIjA_tG0ebCMclyVxN5fwiKhBXm4S2sgVzPVlBe9J7wbLmxMUqKsI.gltIvl94elGptTHTiTVO6fbc62p41;
+        HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Wed, 18 Feb 2026
+        10:55:44 GMT
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       X-Content-Type-Options:
       - nosniff
-      Server:
-      - cloudflare
       Cf-Ray:
-      - 9b84ff1f3e49ee4b-WAW
+      - 9cfcd2769898bbbd-WAW
       Alt-Svc:
       - h3=":443"; ma=86400
     body:
       encoding: ASCII-8BIT
       string: |-
         {
-          "id": "resp_09490cfea459ca3e00695971d701288196920ed6c8c8b7bd29",
+          "id": "resp_072c82d0bc37b4b100699593a78b94819085462fb663444830",
           "object": "response",
-          "created_at": 1767469527,
+          "created_at": 1771410343,
           "status": "completed",
           "background": false,
           "billing": {
             "payer": "developer"
           },
-          "completed_at": 1767469527,
+          "completed_at": 1771410344,
           "error": null,
+          "frequency_penalty": 0.0,
           "incomplete_details": null,
           "instructions": null,
           "max_output_tokens": null,
@@ -94,7 +91,7 @@ http_interactions:
           "model": "gpt-4o-mini-2024-07-18",
           "output": [
             {
-              "id": "msg_09490cfea459ca3e00695971d7b9d081969fc30969f0b1a6c4",
+              "id": "msg_072c82d0bc37b4b100699593a86fc88190ae89265555a27e29",
               "type": "message",
               "status": "completed",
               "content": [
@@ -102,13 +99,14 @@ http_interactions:
                   "type": "output_text",
                   "annotations": [],
                   "logprobs": [],
-                  "text": "The image shows the Google logo, featuring colorful letters on a blue background."
+                  "text": "The image displays the Google logo with its characteristic colors: blue, red, yellow, and green."
                 }
               ],
               "role": "assistant"
             }
           ],
           "parallel_tool_calls": true,
+          "presence_penalty": 0.0,
           "previous_response_id": null,
           "prompt_cache_key": null,
           "prompt_cache_retention": null,
@@ -136,14 +134,14 @@ http_interactions:
             "input_tokens_details": {
               "cached_tokens": 0
             },
-            "output_tokens": 16,
+            "output_tokens": 21,
             "output_tokens_details": {
               "reasoning_tokens": 0
             },
-            "total_tokens": 14202
+            "total_tokens": 14207
           },
           "user": null,
           "metadata": {}
         }
-  recorded_at: Sat, 03 Jan 2026 19:45:28 GMT
+  recorded_at: Wed, 18 Feb 2026 10:25:44 GMT
 recorded_with: VCR 6.4.0

@@ -24,13 +24,15 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 03 Jan 2026 19:45:32 GMT
+      - Wed, 18 Feb 2026 10:26:07 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
+      Server:
+      - cloudflare
       X-Ratelimit-Limit-Requests:
       - '5000'
       X-Ratelimit-Limit-Tokens:
@@ -50,43 +52,38 @@ http_interactions:
       Openai-Project:
       - proj_yBBvayevSgRR3SVjSmBgm0so
       X-Request-Id:
-      - req_33181fb7d2f64fb9a3cc211d551e5714
+      - req_179814a2ce604502ad641eab6e635bcd
       Openai-Processing-Ms:
-      - '1032'
-      X-Envoy-Upstream-Service-Time:
-      - '1034'
+      - '755'
       Cf-Cache-Status:
       - DYNAMIC
       Set-Cookie:
-      - __cf_bm=GMD1knAVOo2XFR0TWE6ePRu2qE6eKc8Ah4sJsfIwD8A-1767469532-1.0.1.1-CqvkIAbDKaGE_AuDLYMs7pcadabfiVzd3F0Ob88MzFHdMbzu593HUEC0W1eb49aHvSaUeQKFipeOSgieix6ScK3sZFDYxLgW.qgF6HsAhWI;
-        path=/; expires=Sat, 03-Jan-26 20:15:32 GMT; domain=.api.openai.com; HttpOnly;
-        Secure; SameSite=None
-      - _cfuvid=x.tNTu99Fn8iN5JGOy_RAlqs9N7_7jb5YaVo9VGilHI-1767469532677-0.0.1.1-604800000;
-        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
+      - __cf_bm=a9GsGFRYvUZI19RRwHGweYNU91JhzDd9z_4VLjqY.Lc-1771410366.2288897-1.0.1.1-ThJjF48481eoPD3jXGvME7GMg.XWgvTiP.jb90puUzvS6bPkbBtRF7NjChPAn6_0SvV6hx3TGSCCVY52ixxveTumrgTcXdx333eDgRMXy3kJNmVFg.clOT917CKwBXW8;
+        HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Wed, 18 Feb 2026
+        10:56:07 GMT
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       X-Content-Type-Options:
       - nosniff
-      Server:
-      - cloudflare
       Cf-Ray:
-      - 9b84ff39cfd0bfe1-WAW
+      - 9cfcd304eb60bfe9-WAW
       Alt-Svc:
       - h3=":443"; ma=86400
     body:
       encoding: ASCII-8BIT
       string: |-
         {
-          "id": "resp_031b2e1733a0fdbc00695971db930481939597451936d70ffe",
+          "id": "resp_0dfc968530085a6600699593be51d08193975fffb4a70ef03f",
           "object": "response",
-          "created_at": 1767469531,
+          "created_at": 1771410366,
           "status": "completed",
           "background": false,
           "billing": {
             "payer": "developer"
           },
-          "completed_at": 1767469532,
+          "completed_at": 1771410366,
           "error": null,
+          "frequency_penalty": 0.0,
           "incomplete_details": null,
           "instructions": null,
           "max_output_tokens": null,
@@ -94,7 +91,7 @@ http_interactions:
           "model": "gpt-4o-mini-2024-07-18",
           "output": [
             {
-              "id": "msg_031b2e1733a0fdbc00695971dc49848193b8f2fedc0ca8fd07",
+              "id": "msg_0dfc968530085a6600699593bea5008193827c129917068580",
               "type": "message",
               "status": "completed",
               "content": [
@@ -102,13 +99,14 @@ http_interactions:
                   "type": "output_text",
                   "annotations": [],
                   "logprobs": [],
-                  "text": "It looks like your message is blank. How can I assist you today?"
+                  "text": "It looks like you haven't entered any text or question. How can I assist you today?"
                 }
               ],
               "role": "assistant"
             }
           ],
           "parallel_tool_calls": true,
+          "presence_penalty": 0.0,
           "previous_response_id": null,
           "prompt_cache_key": null,
           "prompt_cache_retention": null,
@@ -136,14 +134,14 @@ http_interactions:
             "input_tokens_details": {
               "cached_tokens": 0
             },
-            "output_tokens": 16,
+            "output_tokens": 19,
             "output_tokens_details": {
               "reasoning_tokens": 0
             },
-            "total_tokens": 24
+            "total_tokens": 27
           },
           "user": null,
           "metadata": {}
         }
-  recorded_at: Sat, 03 Jan 2026 19:45:32 GMT
+  recorded_at: Wed, 18 Feb 2026 10:26:07 GMT
 recorded_with: VCR 6.4.0

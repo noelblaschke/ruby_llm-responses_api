@@ -24,13 +24,15 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 03 Jan 2026 19:46:00 GMT
+      - Wed, 18 Feb 2026 10:25:37 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
+      Server:
+      - cloudflare
       X-Ratelimit-Limit-Requests:
       - '5000'
       X-Ratelimit-Limit-Tokens:
@@ -50,43 +52,38 @@ http_interactions:
       Openai-Project:
       - proj_yBBvayevSgRR3SVjSmBgm0so
       X-Request-Id:
-      - req_01c78b83a21a4af3b75d9dc9d30571fb
+      - req_779bb5713d1541bea26f3531934d6bc3
       Openai-Processing-Ms:
-      - '1257'
-      X-Envoy-Upstream-Service-Time:
-      - '1261'
+      - '2022'
       Cf-Cache-Status:
       - DYNAMIC
       Set-Cookie:
-      - __cf_bm=MTdAYnT4wx0nXYpC86ZeSLe6eAf9jJSm8xMJUgXYySI-1767469560-1.0.1.1-.qo5b3mX2pKpvKjN75Fsn6P9sdBlmwjOCVrEI4aIsDv2CwoEL58OL2Wuiaok1ykhBmDgGYln.fmeFcJgOBdkYXPYfxu98ddfDx.4W_GLboI;
-        path=/; expires=Sat, 03-Jan-26 20:16:00 GMT; domain=.api.openai.com; HttpOnly;
-        Secure; SameSite=None
-      - _cfuvid=6gfJJdqNe6T3o9vhmeoCu1r8RxyuTKa3EX4VptZGGh8-1767469560072-0.0.1.1-604800000;
-        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
+      - __cf_bm=MrklgmhTXU0qfMYl_t1xNInu1IlkJ1j4b_mqmVhazV8-1771410335.5210688-1.0.1.1-CQkzpmy9UiEbF84tzzxTVfChpsTFPkYzEHLjhZYiCktl97YcAV7fAIvc0cv7Sqm.pO5dwSX3cwguWPkAWyiF1XY78R_EPzUlmVBz.N5lTzESm2Ouf7wGhKFk_vTWaxN3;
+        HttpOnly; Secure; Path=/; Domain=api.openai.com; Expires=Wed, 18 Feb 2026
+        10:55:37 GMT
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       X-Content-Type-Options:
       - nosniff
-      Server:
-      - cloudflare
       Cf-Ray:
-      - 9b84ffe58f927ac9-WAW
+      - 9cfcd2450b62eecf-WAW
       Alt-Svc:
       - h3=":443"; ma=86400
     body:
       encoding: ASCII-8BIT
       string: |-
         {
-          "id": "resp_06472d6e67d9ae0100695971f6c2388197a77c4bc07a2cd8f6",
+          "id": "resp_079049edf195146f006995939f9c0c81979f2eafdab199fa06",
           "object": "response",
-          "created_at": 1767469558,
+          "created_at": 1771410335,
           "status": "completed",
           "background": false,
           "billing": {
             "payer": "developer"
           },
-          "completed_at": 1767469559,
+          "completed_at": 1771410337,
           "error": null,
+          "frequency_penalty": 0.0,
           "incomplete_details": null,
           "instructions": null,
           "max_output_tokens": null,
@@ -94,7 +91,7 @@ http_interactions:
           "model": "gpt-4o-mini-2024-07-18",
           "output": [
             {
-              "id": "msg_06472d6e67d9ae0100695971f70a3c81979b81761e7fdc2066",
+              "id": "msg_079049edf195146f00699593a0ab488197a2611f9979ce035d",
               "type": "message",
               "status": "completed",
               "content": [
@@ -102,13 +99,14 @@ http_interactions:
                   "type": "output_text",
                   "annotations": [],
                   "logprobs": [],
-                  "text": "As the clock struck midnight, the forgotten bookshop came alive with whispers of its long-lost characters dancing unbidden through its aisles, searching for the readers who once loved their tales."
+                  "text": "As the last leaf fluttered to the ground, the forgotten tree whispered its secrets to the stars, reminding them of the vibrant lives that had danced in its branches."
                 }
               ],
               "role": "assistant"
             }
           ],
           "parallel_tool_calls": true,
+          "presence_penalty": 0.0,
           "previous_response_id": null,
           "prompt_cache_key": null,
           "prompt_cache_retention": null,
@@ -136,14 +134,14 @@ http_interactions:
             "input_tokens_details": {
               "cached_tokens": 0
             },
-            "output_tokens": 39,
+            "output_tokens": 34,
             "output_tokens_details": {
               "reasoning_tokens": 0
             },
-            "total_tokens": 54
+            "total_tokens": 49
           },
           "user": null,
           "metadata": {}
         }
-  recorded_at: Sat, 03 Jan 2026 19:46:00 GMT
+  recorded_at: Wed, 18 Feb 2026 10:25:37 GMT
 recorded_with: VCR 6.4.0

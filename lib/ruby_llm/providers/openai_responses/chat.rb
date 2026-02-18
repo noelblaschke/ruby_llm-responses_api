@@ -12,7 +12,7 @@ module RubyLLM
 
         module_function
 
-        def render_payload(messages, tools:, temperature:, model:, stream: false, schema: nil) # rubocop:disable Metrics/ParameterLists
+        def render_payload(messages, tools:, temperature:, model:, stream: false, schema: nil, thinking: nil) # rubocop:disable Metrics/ParameterLists
           # Extract system messages for instructions
           system_messages = messages.select { |m| m.role == :system }
           non_system_messages = messages.reject { |m| m.role == :system }
