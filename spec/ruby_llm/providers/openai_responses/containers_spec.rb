@@ -45,8 +45,8 @@ RSpec.describe RubyLLM::Providers::OpenAIResponses::Containers do
     end
 
     it 'includes file_ids when provided' do
-      payload = containers.create_payload(file_ids: ['file_1', 'file_2'])
-      expect(payload[:file_ids]).to eq(['file_1', 'file_2'])
+      payload = containers.create_payload(file_ids: %w[file_1 file_2])
+      expect(payload[:file_ids]).to eq(%w[file_1 file_2])
     end
 
     it 'includes memory_limit when provided' do

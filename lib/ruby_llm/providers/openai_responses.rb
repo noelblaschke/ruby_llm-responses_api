@@ -20,7 +20,8 @@ module RubyLLM
       def complete(messages, tools:, temperature:, model:, params: {}, headers: {}, schema: nil, thinking: nil, &block) # rubocop:disable Metrics/ParameterLists
         if params[:transport]&.to_sym == :websocket
           ws_complete(messages, tools: tools, temperature: temperature, model: model,
-                      params: params.except(:transport), schema: schema, thinking: thinking, &block)
+                                params: params.except(:transport), schema: schema,
+                                thinking: thinking, &block)
         else
           super
         end
@@ -147,7 +148,7 @@ module RubyLLM
 
       private
 
-      def ws_complete(messages, tools:, temperature:, model:, params:, schema:, thinking:, &block)
+      def ws_complete(messages, tools:, temperature:, model:, params:, schema:, thinking:, &block) # rubocop:disable Metrics/ParameterLists
         normalized_temperature = maybe_normalize_temperature(temperature, model)
 
         payload = Utils.deep_merge(
@@ -183,8 +184,6 @@ module RubyLLM
           req.headers.merge!(headers)
         end
       end
-
-      public
 
       class << self
         def capabilities

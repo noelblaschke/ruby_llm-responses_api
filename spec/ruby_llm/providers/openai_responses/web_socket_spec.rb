@@ -8,11 +8,11 @@ RSpec.describe RubyLLM::Providers::OpenAIResponses::WebSocket do
   let(:mock_client_class) { MockWSClientClass.new(mock_ws_client) }
   let(:ws) { described_class.new(api_key: api_key, client_class: mock_client_class) }
 
-  WSMessage = Struct.new(:data) unless defined?(WSMessage) # rubocop:disable Lint/ConstantDefinitionInBlock,RSpec/LeakyConstantDeclaration
+  WSMessage = Struct.new(:data) unless defined?(WSMessage)
 
   # Lightweight mock that captures on() handlers and send() calls,
   # avoiding any dependency on the real websocket-client-simple gem.
-  class MockWSClient # rubocop:disable Lint/ConstantDefinitionInBlock,RSpec/LeakyConstantDeclaration
+  class MockWSClient # rubocop:disable Lint/ConstantDefinitionInBlock
     attr_reader :sent_messages
 
     def initialize
@@ -34,12 +34,12 @@ RSpec.describe RubyLLM::Providers::OpenAIResponses::WebSocket do
       @handlers[event].each { |h| h.call(*args) }
     end
 
-    def has_handler?(event) # rubocop:disable Naming/PredicateName
+    def has_handler?(event)
       @handlers.key?(event)
     end
   end
 
-  class MockWSClientClass # rubocop:disable Lint/ConstantDefinitionInBlock,RSpec/LeakyConstantDeclaration
+  class MockWSClientClass # rubocop:disable Lint/ConstantDefinitionInBlock
     attr_reader :client
 
     def initialize(client)
@@ -224,7 +224,10 @@ RSpec.describe RubyLLM::Providers::OpenAIResponses::WebSocket do
     end
 
     it 'raises on error event' do
-      error_event = { 'type' => 'error', 'error' => { 'message' => 'Rate limit exceeded', 'type' => 'rate_limit_exceeded' } }
+      error_event = {
+        'type' => 'error',
+        'error' => { 'message' => 'Rate limit exceeded', 'type' => 'rate_limit_exceeded' }
+      }
 
       expect do
         with_events([error_event]) do

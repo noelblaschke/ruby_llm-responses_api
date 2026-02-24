@@ -5,6 +5,7 @@ AllCops:
   Exclude:
     - 'vendor/**/*'
     - 'ruby_llm_source/**/*'
+    - 'test_rails_app/**/*'
 
 Style/Documentation:
   Enabled: false
@@ -31,6 +32,11 @@ Metrics/CyclomaticComplexity:
 
 Metrics/PerceivedComplexity:
   Max: 12
+
+Metrics/ClassLength:
+  Max: 150
+  Exclude:
+    - 'spec/**/*'
 
 Metrics/ModuleLength:
   Max: 250

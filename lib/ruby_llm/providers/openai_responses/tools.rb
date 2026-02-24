@@ -191,7 +191,7 @@ module RubyLLM
         end
 
         def shell_tool(environment_type: 'container_auto', container_id: nil,
-                        network_policy: nil, memory_limit: nil)
+                       network_policy: nil, memory_limit: nil)
           env = if container_id
                   { type: 'container_reference', container_id: container_id }
                 else

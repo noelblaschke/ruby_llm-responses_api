@@ -51,7 +51,7 @@ RSpec.describe RubyLLM::Providers::OpenAIResponses do
 
   describe '#complete with transport: :websocket' do
     let(:mock_ws) { instance_double(RubyLLM::Providers::OpenAIResponses::WebSocket) }
-    let(:model) { double('Model', id: 'gpt-4o') } # rubocop:disable RSpec/VerifiedDoubles
+    let(:model) { double('Model', id: 'gpt-4o') }
     let(:messages) { [RubyLLM::Message.new(role: :user, content: 'Hello')] }
     let(:response_message) { RubyLLM::Message.new(role: :assistant, content: 'Hi there', response_id: 'resp_123') }
 

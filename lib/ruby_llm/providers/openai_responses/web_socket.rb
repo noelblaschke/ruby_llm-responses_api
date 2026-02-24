@@ -21,7 +21,7 @@ module RubyLLM
       #   ws.connect
       #   ws.create_response(model: 'gpt-4o', input: [...]) { |chunk| ... }
       #   ws.disconnect
-      class WebSocket
+      class WebSocket # rubocop:disable Metrics/ClassLength
         WEBSOCKET_PATH = '/v1/responses'
         KNOWN_PARAMS = %i[store metadata compact_threshold context_management].freeze
 
@@ -96,7 +96,7 @@ module RubyLLM
         # @param payload [Hash] Responses API payload (model, input, tools, etc.)
         # @yield [RubyLLM::Chunk] each streamed chunk
         # @return [RubyLLM::Message] the assembled final message
-        def call(payload, &block)
+        def call(payload, &)
           ensure_connected!
           acquire_flight!
 
@@ -105,7 +105,7 @@ module RubyLLM
 
           envelope = { type: 'response.create', response: payload.except(:stream) }
           send_json(envelope)
-          accumulate_response(queue, &block)
+          accumulate_response(queue, &)
         ensure
           @mutex.synchronize { @message_queue = nil }
           release_flight!
@@ -122,7 +122,7 @@ module RubyLLM
         # @param extra [Hash] additional fields forwarded to the API
         # @yield [RubyLLM::Chunk] each streamed chunk
         # @return [RubyLLM::Message] the assembled final message
-        def create_response(model:, input:, tools: nil, previous_response_id: nil, instructions: nil, **extra, &block)
+        def create_response(model:, input:, tools: nil, previous_response_id: nil, instructions: nil, **extra, &block) # rubocop:disable Metrics/ParameterLists
           payload = build_standalone_payload(
             model: model, input: input, tools: tools,
             previous_response_id: previous_response_id,
@@ -221,7 +221,7 @@ module RubyLLM
           headers
         end
 
-        def build_standalone_payload(model:, input:, tools: nil, previous_response_id: nil, instructions: nil, **extra)
+        def build_standalone_payload(model:, input:, tools: nil, previous_response_id: nil, instructions: nil, **extra) # rubocop:disable Metrics/ParameterLists
           prev_id = previous_response_id || @last_response_id
           response = { model: model, input: input }
           response[:tools] = tools.map { |t| Tools.tool_for(t) } if tools&.any?
@@ -231,7 +231,7 @@ module RubyLLM
           State.apply_state_params(response, extra)
           Compaction.apply_compaction(response, extra)
 
-          forwarded = extra.reject { |k, _| KNOWN_PARAMS.include?(k) }
+          forwarded = extra.except(*KNOWN_PARAMS)
           response.merge(forwarded)
         end
 
