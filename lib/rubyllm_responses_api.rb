@@ -22,6 +22,7 @@ require_relative 'ruby_llm/providers/openai_responses/containers'
 require_relative 'ruby_llm/providers/openai_responses/message_extension'
 require_relative 'ruby_llm/providers/openai_responses/model_registry'
 require_relative 'ruby_llm/providers/openai_responses/active_record_extension'
+require_relative 'ruby_llm/providers/openai_responses/web_socket'
 
 # Include all modules in the provider class
 require_relative 'ruby_llm/providers/openai_responses'
@@ -36,7 +37,7 @@ RubyLLM::Providers::OpenAIResponses::ModelRegistry.register_all!
 module RubyLLM
   # ResponsesAPI namespace for direct access to helpers and version
   module ResponsesAPI
-    VERSION = '0.3.1'
+    VERSION = '0.4.0'
 
     # Shorthand access to built-in tool helpers
     BuiltInTools = Providers::OpenAIResponses::BuiltInTools
@@ -44,5 +45,6 @@ module RubyLLM
     Background = Providers::OpenAIResponses::Background
     Compaction = Providers::OpenAIResponses::Compaction
     Containers = Providers::OpenAIResponses::Containers
+    WebSocket = Providers::OpenAIResponses::WebSocket
   end
 end

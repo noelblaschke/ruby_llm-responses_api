@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-02-24
+
+### Added
+
+- **WebSocket mode** for lower-latency agentic workflows with persistent `wss://` connections
+  - `RubyLLM::ResponsesAPI::WebSocket` standalone class
+  - Streamed responses via `create_response` with block
+  - Automatic `previous_response_id` chaining across turns
+  - `warmup` for server-side model weight caching (`generate: false`)
+  - Thread-safe with one-at-a-time response constraint
+  - Supports all existing helpers: `State`, `Compaction`, `Tools`
+  - Soft dependency on `websocket-client-simple` (lazy require with clear error)
+
 ## [0.3.1] - 2026-02-18
 
 ### Fixed

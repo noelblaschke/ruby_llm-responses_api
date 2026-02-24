@@ -259,6 +259,72 @@ image_results  = RubyLLM::ResponsesAPI::BuiltInTools.parse_image_generation_resu
 citations      = RubyLLM::ResponsesAPI::BuiltInTools.extract_citations(message_content)
 ```
 
+## WebSocket Mode
+
+For agentic workflows with many tool-call round trips, WebSocket mode provides lower latency by maintaining a persistent connection instead of HTTP requests per turn.
+
+Requires the `websocket-client-simple` gem:
+
+```ruby
+gem 'websocket-client-simple'
+```
+
+### Basic usage
+
+```ruby
+ws = RubyLLM::ResponsesAPI::WebSocket.new(api_key: ENV['OPENAI_API_KEY'])
+ws.connect
+
+# Stream a response
+message = ws.create_response(
+  model: 'gpt-4o',
+  input: [{ type: 'message', role: 'user', content: 'Hello!' }]
+) do |chunk|
+  print chunk.content if chunk.content
+end
+
+puts "\n#{message.content}"
+```
+
+### Multi-turn conversations
+
+`previous_response_id` is tracked automatically across turns:
+
+```ruby
+ws.create_response(model: 'gpt-4o', input: [
+  { type: 'message', role: 'user', content: 'My name is Alice.' }
+])
+
+ws.create_response(model: 'gpt-4o', input: [
+  { type: 'message', role: 'user', content: "What's my name?" }
+])
+# => "Alice" (auto-chained via previous_response_id)
+```
+
+### With tools
+
+```ruby
+ws.create_response(
+  model: 'gpt-4o',
+  input: [{ type: 'message', role: 'user', content: 'Search for Ruby 3.4 release notes' }],
+  tools: [{ type: 'web_search_preview' }]
+)
+```
+
+### Warmup
+
+Pre-cache model weights without generating output:
+
+```ruby
+ws.warmup(model: 'gpt-4o')
+```
+
+### Cleanup
+
+```ruby
+ws.disconnect
+```
+
 ## Why Use the Responses API?
 
 - **Built-in tools** - Web search, code execution, file search, shell, apply patch without custom implementation
@@ -266,6 +332,7 @@ citations      = RubyLLM::ResponsesAPI::BuiltInTools.extract_citations(message_c
 - **Simpler multi-turn** - No need to send full message history on each request
 - **Server-side compaction** - Run multi-hour agent sessions without hitting context limits
 - **Containers** - Persistent execution environments with networking and file management
+- **WebSocket mode** - Lower-latency persistent connections for agentic tool-call loops
 
 ## License
 
