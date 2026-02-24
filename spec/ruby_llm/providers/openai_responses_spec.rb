@@ -48,4 +48,60 @@ RSpec.describe RubyLLM::Providers::OpenAIResponses do
       expect(provider.headers).not_to have_key('OpenAI-Organization')
     end
   end
+
+  describe '#complete with transport: :websocket' do
+    let(:mock_ws) { instance_double(RubyLLM::Providers::OpenAIResponses::WebSocket) }
+    let(:model) { double('Model', id: 'gpt-4o') } # rubocop:disable RSpec/VerifiedDoubles
+    let(:messages) { [RubyLLM::Message.new(role: :user, content: 'Hello')] }
+    let(:response_message) { RubyLLM::Message.new(role: :assistant, content: 'Hi there', response_id: 'resp_123') }
+
+    before do
+      allow(RubyLLM::Providers::OpenAIResponses::WebSocket).to receive(:new).and_return(mock_ws)
+      allow(mock_ws).to receive(:connected?).and_return(false, true)
+      allow(mock_ws).to receive(:connect).and_return(mock_ws)
+      allow(mock_ws).to receive(:call).and_return(response_message)
+    end
+
+    it 'routes through WebSocket when transport: :websocket' do
+      result = provider.complete(
+        messages,
+        tools: {},
+        temperature: nil,
+        model: model,
+        params: { transport: :websocket }
+      )
+
+      expect(mock_ws).to have_received(:connect)
+      expect(mock_ws).to have_received(:call)
+      expect(result.content).to eq('Hi there')
+    end
+
+    it 'does not pass transport key to the WebSocket payload' do
+      provider.complete(
+        messages,
+        tools: {},
+        temperature: nil,
+        model: model,
+        params: { transport: :websocket }
+      )
+
+      expect(mock_ws).to have_received(:call) do |payload|
+        expect(payload).not_to have_key(:transport)
+      end
+    end
+
+    it 'falls through to HTTP when transport is not websocket' do
+      allow(provider).to receive(:sync_response).and_return(response_message)
+
+      provider.complete(
+        messages,
+        tools: {},
+        temperature: nil,
+        model: model,
+        params: {}
+      )
+
+      expect(mock_ws).not_to have_received(:call)
+    end
+  end
 end

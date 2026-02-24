@@ -16,6 +16,16 @@ module RubyLLM
         @config.openai_api_base || 'https://api.openai.com/v1'
       end
 
+      # Override to support WebSocket transport via with_params(transport: :websocket)
+      def complete(messages, tools:, temperature:, model:, params: {}, headers: {}, schema: nil, thinking: nil, &block) # rubocop:disable Metrics/ParameterLists
+        if params[:transport]&.to_sym == :websocket
+          ws_complete(messages, tools: tools, temperature: temperature, model: model,
+                      params: params.except(:transport), schema: schema, thinking: thinking, &block)
+        else
+          super
+        end
+      end
+
       def headers
         {
           'Authorization' => "Bearer #{@config.openai_api_key}",
@@ -136,6 +146,35 @@ module RubyLLM
       end
 
       private
+
+      def ws_complete(messages, tools:, temperature:, model:, params:, schema:, thinking:, &block)
+        normalized_temperature = maybe_normalize_temperature(temperature, model)
+
+        payload = Utils.deep_merge(
+          render_payload(
+            messages,
+            tools: tools,
+            temperature: normalized_temperature,
+            model: model,
+            stream: true,
+            schema: schema,
+            thinking: thinking
+          ),
+          params
+        )
+
+        ws_connection.connect unless ws_connection.connected?
+        ws_connection.call(payload, &block)
+      end
+
+      def ws_connection
+        @ws_connection ||= WebSocket.new(
+          api_key: @config.openai_api_key,
+          api_base: api_base,
+          organization_id: @config.openai_organization_id,
+          project_id: @config.openai_project_id
+        )
+      end
 
       # DELETE request via the underlying Faraday connection
       # RubyLLM::Connection only exposes get/post, so we use Faraday directly

@@ -279,6 +279,46 @@ RSpec.describe RubyLLM::Providers::OpenAIResponses::WebSocket do
     end
   end
 
+  describe '#call' do
+    before { connect_ws! }
+
+    it 'accepts a pre-built payload and wraps in WS envelope' do
+      payload = { model: 'gpt-4o', input: [{ type: 'message', role: 'user', content: 'Hi' }] }
+
+      with_events(standard_events) do
+        ws.call(payload)
+      end
+
+      sent = last_sent_payload
+      expect(sent['type']).to eq('response.create')
+      expect(sent['response']['model']).to eq('gpt-4o')
+    end
+
+    it 'strips :stream from the payload' do
+      payload = { model: 'gpt-4o', input: [], stream: true }
+
+      with_events(standard_events) do
+        ws.call(payload)
+      end
+
+      expect(last_sent_payload['response']).not_to have_key('stream')
+    end
+
+    it 'yields chunks and returns assembled Message' do
+      payload = { model: 'gpt-4o', input: [] }
+      chunks = []
+
+      message = with_events(standard_events(text_deltas: %w[Hello world])) do
+        ws.call(payload) { |chunk| chunks << chunk }
+      end
+
+      expect(chunks.select(&:content).map(&:content)).to eq(%w[Hello world])
+      expect(message).to be_a(RubyLLM::Message)
+      expect(message.content).to eq('Helloworld')
+      expect(message.response_id).to eq('resp_ws_test')
+    end
+  end
+
   describe '#warmup' do
     before { connect_ws! }
 

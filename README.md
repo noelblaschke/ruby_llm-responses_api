@@ -269,59 +269,40 @@ Requires the `websocket-client-simple` gem:
 gem 'websocket-client-simple'
 ```
 
-### Basic usage
+### Usage
+
+Just add `transport: :websocket` to your params -- the standard `chat.ask` API works as-is:
+
+```ruby
+chat = RubyLLM.chat(model: 'gpt-4o', provider: :openai_responses)
+chat.with_params(transport: :websocket)
+
+chat.ask("Hello!")
+chat.ask("What's 2+2?")  # reuses the same WebSocket connection
+```
+
+Streaming works the same way:
+
+```ruby
+chat.ask("Tell me a story") { |chunk| print chunk.content }
+```
+
+### Direct WebSocket access
+
+For advanced use cases (raw Responses API format, warmup, explicit connection management):
 
 ```ruby
 ws = RubyLLM::ResponsesAPI::WebSocket.new(api_key: ENV['OPENAI_API_KEY'])
 ws.connect
 
-# Stream a response
-message = ws.create_response(
-  model: 'gpt-4o',
-  input: [{ type: 'message', role: 'user', content: 'Hello!' }]
-) do |chunk|
-  print chunk.content if chunk.content
-end
-
-puts "\n#{message.content}"
-```
-
-### Multi-turn conversations
-
-`previous_response_id` is tracked automatically across turns:
-
-```ruby
-ws.create_response(model: 'gpt-4o', input: [
-  { type: 'message', role: 'user', content: 'My name is Alice.' }
-])
-
-ws.create_response(model: 'gpt-4o', input: [
-  { type: 'message', role: 'user', content: "What's my name?" }
-])
-# => "Alice" (auto-chained via previous_response_id)
-```
-
-### With tools
-
-```ruby
 ws.create_response(
   model: 'gpt-4o',
-  input: [{ type: 'message', role: 'user', content: 'Search for Ruby 3.4 release notes' }],
-  tools: [{ type: 'web_search_preview' }]
-)
-```
+  input: [{ type: 'message', role: 'user', content: 'Hello!' }]
+) { |chunk| print chunk.content }
 
-### Warmup
-
-Pre-cache model weights without generating output:
-
-```ruby
+# Pre-cache model weights
 ws.warmup(model: 'gpt-4o')
-```
 
-### Cleanup
-
-```ruby
 ws.disconnect
 ```
 

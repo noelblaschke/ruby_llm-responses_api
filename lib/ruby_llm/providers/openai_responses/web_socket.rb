@@ -11,14 +11,15 @@ module RubyLLM
       #
       # Requires the `websocket-client-simple` gem (soft dependency).
       #
-      # Usage:
+      # Integrated usage (recommended):
+      #   chat = RubyLLM.chat(model: 'gpt-4o', provider: :openai_responses)
+      #   chat.with_params(transport: :websocket)
+      #   chat.ask("Hello!")
+      #
+      # Standalone usage (advanced):
       #   ws = RubyLLM::ResponsesAPI::WebSocket.new(api_key: ENV['OPENAI_API_KEY'])
       #   ws.connect
-      #
-      #   ws.create_response(model: 'gpt-4o', input: [{ type: 'message', role: 'user', content: 'Hi' }]) do |chunk|
-      #     print chunk.content if chunk.content
-      #   end
-      #
+      #   ws.create_response(model: 'gpt-4o', input: [...]) { |chunk| ... }
       #   ws.disconnect
       class WebSocket
         WEBSOCKET_PATH = '/v1/responses'
@@ -73,7 +74,6 @@ module RubyLLM
             end
           end
 
-          # Route all messages to the current queue (swapped per request)
           @ws.on(:message) do |msg|
             q = @mutex.synchronize { @message_queue }
             q&.push(msg.data)
@@ -89,35 +89,47 @@ module RubyLLM
           self
         end
 
-        # Send a response.create request and stream chunks via block.
-        # @param model [String] model ID
-        # @param input [Array<Hash>] input items in Responses API format
-        # @param tools [Array<Hash>, nil] tool definitions
-        # @param previous_response_id [String, nil] chain to a prior response
-        # @param instructions [String, nil] system/developer instructions
-        # @param extra [Hash] additional top-level fields forwarded to the API
+        # Send a pre-built payload over WebSocket, streaming chunks via block.
+        # This is the integration point for Provider#complete -- it accepts the
+        # same payload hash that render_payload returns.
+        #
+        # @param payload [Hash] Responses API payload (model, input, tools, etc.)
         # @yield [RubyLLM::Chunk] each streamed chunk
         # @return [RubyLLM::Message] the assembled final message
-        # @raise [ConcurrencyError] if another response is already in flight
-        # @raise [ConnectionError] if not connected
-        def create_response(model:, input:, tools: nil, previous_response_id: nil, instructions: nil, **extra, &block)
+        def call(payload, &block)
           ensure_connected!
           acquire_flight!
 
           queue = Queue.new
           @mutex.synchronize { @message_queue = queue }
 
-          payload = build_payload(
+          envelope = { type: 'response.create', response: payload.except(:stream) }
+          send_json(envelope)
+          accumulate_response(queue, &block)
+        ensure
+          @mutex.synchronize { @message_queue = nil }
+          release_flight!
+        end
+
+        # Send a response.create request using raw Responses API format.
+        # Useful for standalone usage outside the RubyLLM chat interface.
+        #
+        # @param model [String] model ID
+        # @param input [Array<Hash>] input items in Responses API format
+        # @param tools [Array<Hash>, nil] tool definitions
+        # @param previous_response_id [String, nil] chain to a prior response
+        # @param instructions [String, nil] system/developer instructions
+        # @param extra [Hash] additional fields forwarded to the API
+        # @yield [RubyLLM::Chunk] each streamed chunk
+        # @return [RubyLLM::Message] the assembled final message
+        def create_response(model:, input:, tools: nil, previous_response_id: nil, instructions: nil, **extra, &block)
+          payload = build_standalone_payload(
             model: model, input: input, tools: tools,
             previous_response_id: previous_response_id,
             instructions: instructions, **extra
           )
 
-          send_json(payload)
-          accumulate_response(queue, &block)
-        ensure
-          @mutex.synchronize { @message_queue = nil }
-          release_flight!
+          call(payload, &block)
         end
 
         # Warm up the connection by sending a response.create with generate: false.
@@ -209,7 +221,7 @@ module RubyLLM
           headers
         end
 
-        def build_payload(model:, input:, tools: nil, previous_response_id: nil, instructions: nil, **extra)
+        def build_standalone_payload(model:, input:, tools: nil, previous_response_id: nil, instructions: nil, **extra)
           prev_id = previous_response_id || @last_response_id
           response = { model: model, input: input }
           response[:tools] = tools.map { |t| Tools.tool_for(t) } if tools&.any?
@@ -220,7 +232,7 @@ module RubyLLM
           Compaction.apply_compaction(response, extra)
 
           forwarded = extra.reject { |k, _| KNOWN_PARAMS.include?(k) }
-          { type: 'response.create', response: response.merge(forwarded) }
+          response.merge(forwarded)
         end
 
         def send_json(payload)
@@ -247,22 +259,14 @@ module RubyLLM
             end
           end
 
-          build_final_message(accumulator)
+          message = accumulator.to_message(nil)
+          message.response_id = @last_response_id
+          message
         end
 
         def track_response_id(data)
           resp_id = data.dig('response', 'id')
           @mutex.synchronize { @last_response_id = resp_id } if resp_id
-        end
-
-        def build_final_message(accumulator)
-          Message.new(
-            role: :assistant,
-            content: accumulator.content,
-            tool_calls: accumulator.tool_calls.empty? ? nil : accumulator.tool_calls,
-            model_id: accumulator.model_id,
-            response_id: @last_response_id
-          )
         end
 
         def ensure_connected!
