@@ -259,6 +259,44 @@ image_results  = RubyLLM::ResponsesAPI::BuiltInTools.parse_image_generation_resu
 citations      = RubyLLM::ResponsesAPI::BuiltInTools.extract_citations(message_content)
 ```
 
+## Batch API
+
+Process many requests asynchronously at 50% lower cost with a 24-hour completion window:
+
+```ruby
+# Create a batch
+batch = RubyLLM.batch(model: 'gpt-4o', provider: :openai_responses)
+
+# Add requests (auto-generates IDs or use your own)
+batch.add("What is Ruby?")
+batch.add("What is Python?", instructions: "Be brief", temperature: 0.5)
+batch.add("Translate: hello", id: "translate_1")
+
+# Submit (uploads JSONL file + creates batch)
+batch.create!
+batch.id  # => "batch_abc123"
+
+# Poll until done
+batch.wait!(interval: 60) { |b| puts "#{b.completed_count}/#{b.total_count}" }
+
+# Get results as Messages keyed by custom_id
+results = batch.results
+results["request_0"].content  # => "Ruby is a dynamic..."
+results["translate_1"].content  # => "Hola"
+
+# Resume from a previous session
+batch = RubyLLM.batch(id: "batch_abc123", provider: :openai_responses)
+batch.results
+
+# Cancel a running batch
+batch.cancel!
+
+# List existing batches
+RubyLLM.batches(provider: :openai_responses)
+```
+
+**Constraints**: No `web_search`/`code_interpreter` tools, no `previous_response_id` chaining, max 50k requests per batch, 200MB file limit.
+
 ## WebSocket Mode
 
 For agentic workflows with many tool-call round trips, WebSocket mode provides lower latency by maintaining a persistent connection instead of HTTP requests per turn.
@@ -314,6 +352,7 @@ ws.disconnect
 - **Server-side compaction** - Run multi-hour agent sessions without hitting context limits
 - **Containers** - Persistent execution environments with networking and file management
 - **WebSocket mode** - Lower-latency persistent connections for agentic tool-call loops
+- **Batch API** - Process bulk requests at 50% lower cost with 24-hour turnaround
 
 ## License
 

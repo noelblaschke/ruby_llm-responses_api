@@ -146,6 +146,22 @@ module RubyLLM
         response.body
       end
 
+      # --- Batch API ---
+
+      # List batches
+      # @param limit [Integer] Number of batches to return (default: 20)
+      # @param after [String, nil] Cursor for pagination
+      # @return [Hash] Batch listing with 'data' array
+      def list_batches(limit: 20, after: nil)
+        url = Batches.batches_url
+        params = { limit: limit }
+        params[:after] = after if after
+        response = @connection.get(url) do |req|
+          req.params.merge!(params)
+        end
+        response.body
+      end
+
       private
 
       def ws_complete(messages, tools:, temperature:, model:, params:, schema:, thinking:, &block) # rubocop:disable Metrics/ParameterLists

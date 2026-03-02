@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-02-25
+
+### Added
+
+- **Batch API** for processing many requests asynchronously at 50% lower cost
+  - `RubyLLM.batch(model:, provider:)` factory method
+  - `Batch#add` to queue requests with auto-generated or custom IDs
+  - `Batch#create!` to upload JSONL and create the batch in one call
+  - `Batch#wait!` to poll until completion with progress callbacks
+  - `Batch#results` returns a `Hash<custom_id, Message>` using the same parsing as `Chat`
+  - `Batch#errors`, `Batch#cancel!`, and status helpers (`completed?`, `in_progress?`, `failed?`)
+  - Resume from a previous session via `RubyLLM.batch(id: "batch_abc", provider: :openai_responses)`
+  - `RubyLLM.batches` to list existing batches
+  - `Batches` helper module with JSONL builder, URL helpers, and result parsing
+
 ## [0.4.1] - 2026-02-24
 
 ### Added
