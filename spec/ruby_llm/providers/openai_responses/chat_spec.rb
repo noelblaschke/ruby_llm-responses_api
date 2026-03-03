@@ -53,6 +53,65 @@ RSpec.describe RubyLLM::Providers::OpenAIResponses::Chat do
 
       expect(payload[:temperature]).to eq(0.7)
     end
+
+    context 'with tool_prefs' do
+      let(:tool) do
+        instance_double(RubyLLM::Tool, name: 'get_weather', description: 'Get weather',
+                                       parameters: [], params_schema: nil)
+      end
+      let(:tools) { { get_weather: tool } }
+
+      before do
+        allow(RubyLLM::Providers::OpenAIResponses::Tools)
+          .to receive(:tool_for).and_return({ type: 'function', name: 'get_weather' })
+      end
+
+      it 'includes tool_choice when choice is set' do
+        payload = chat_module.render_payload(
+          [user_message], tools: tools, temperature: nil, model: model,
+                          tool_prefs: { choice: :required, calls: nil }
+        )
+
+        expect(payload[:tool_choice]).to eq('required')
+      end
+
+      it 'includes parallel_tool_calls when calls is :many' do
+        payload = chat_module.render_payload(
+          [user_message], tools: tools, temperature: nil, model: model,
+                          tool_prefs: { choice: nil, calls: :many }
+        )
+
+        expect(payload[:parallel_tool_calls]).to be true
+      end
+
+      it 'sets parallel_tool_calls false when calls is :one' do
+        payload = chat_module.render_payload(
+          [user_message], tools: tools, temperature: nil, model: model,
+                          tool_prefs: { choice: nil, calls: :one }
+        )
+
+        expect(payload[:parallel_tool_calls]).to be false
+      end
+
+      it 'formats specific function choice correctly' do
+        payload = chat_module.render_payload(
+          [user_message], tools: tools, temperature: nil, model: model,
+                          tool_prefs: { choice: :get_weather, calls: nil }
+        )
+
+        expect(payload[:tool_choice]).to eq({ type: 'function', name: 'get_weather' })
+      end
+
+      it 'omits tool_choice and parallel_tool_calls when nil' do
+        payload = chat_module.render_payload(
+          [user_message], tools: tools, temperature: nil, model: model,
+                          tool_prefs: { choice: nil, calls: nil }
+        )
+
+        expect(payload).not_to have_key(:tool_choice)
+        expect(payload).not_to have_key(:parallel_tool_calls)
+      end
+    end
   end
 
   describe '.parse_completion_response' do

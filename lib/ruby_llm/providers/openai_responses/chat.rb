@@ -15,6 +15,7 @@ module RubyLLM
         # rubocop:disable Metrics/ParameterLists
         def render_payload(messages, tools:, temperature:, model:, stream: false,
                            schema: nil, thinking: nil, tool_prefs: nil) # rubocop:disable Lint/UnusedMethodArgument
+          tool_prefs ||= {}
           system_messages = messages.select { |m| m.role == :system }
           non_system_messages = messages.reject { |m| m.role == :system }
 
@@ -28,7 +29,7 @@ module RubyLLM
 
           payload[:instructions] = instructions unless instructions.empty?
           payload[:temperature] = temperature unless temperature.nil?
-          payload[:tools] = tools.map { |_, tool| tool_for(tool) } if tools.any?
+          apply_tools(payload, tools, tool_prefs)
           payload[:text] = build_schema_format(schema) if schema
 
           last_response_id = extract_last_response_id(messages)
@@ -37,6 +38,27 @@ module RubyLLM
           payload
         end
         # rubocop:enable Metrics/ParameterLists
+
+        # Apply tools and tool preferences to the payload.
+        def apply_tools(payload, tools, tool_prefs)
+          return unless tools.any?
+
+          payload[:tools] = tools.map { |_, tool| Tools.tool_for(tool) }
+          payload[:tool_choice] = build_tool_choice(tool_prefs[:choice]) unless tool_prefs[:choice].nil?
+          payload[:parallel_tool_calls] = tool_prefs[:calls] == :many unless tool_prefs[:calls].nil?
+        end
+
+        # Convert a RubyLLM tool choice symbol to the Responses API format.
+        # Responses API accepts "auto", "required", "none", or
+        # { type: "function", name: "fn_name" } for a specific function.
+        def build_tool_choice(choice)
+          case choice
+          when :auto, :none, :required
+            choice.to_s
+          else
+            { type: 'function', name: choice.to_s }
+          end
+        end
 
         # Build the Responses API text format block from a schema.
         # Schema arrives pre-normalized as { name:, schema:, strict: } from

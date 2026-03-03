@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.5.1] - 2026-03-03
 
+### Added
+
+- `tool_choice` support (`auto`, `required`, `none`, or specific function name)
+- `parallel_tool_calls` support (`:many` / `:one`) via RubyLLM's `tool_prefs`
+
 ### Fixed
 
 - Compatibility with RubyLLM v1.13.0 (`tool_prefs:` parameter in `complete` and `render_payload`)
