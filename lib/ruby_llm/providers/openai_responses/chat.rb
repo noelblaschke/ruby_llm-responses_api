@@ -16,8 +16,7 @@ module RubyLLM
         def render_payload(messages, tools:, temperature:, model:, stream: false,
                            schema: nil, thinking: nil, tool_prefs: nil) # rubocop:disable Lint/UnusedMethodArgument
           tool_prefs ||= {}
-          system_messages = messages.select { |m| m.role == :system }
-          non_system_messages = messages.reject { |m| m.role == :system }
+          system_messages, non_system_messages = messages.partition { |m| m.role == :system }
 
           instructions = system_messages.map { |m| extract_text_content(m.content) }.join("\n\n")
 

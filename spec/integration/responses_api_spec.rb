@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-# Define test tool outside RSpec context for consistent naming
+# Define test tools outside RSpec context for consistent naming
 class TestWeatherTool < RubyLLM::Tool
   description 'Get the current weather for a location'
   param :location, type: 'string', desc: 'The city name'
@@ -12,7 +12,7 @@ class TestWeatherTool < RubyLLM::Tool
   end
 end
 
-class TestCalculatorTool < RubyLLM::Tool
+class TestCalculatorTool < RubyLLM::Tool # rubocop:disable Style/OneClassPerFile
   description 'Perform basic math calculations'
   param :expression, type: 'string', desc: 'Math expression to evaluate'
 
