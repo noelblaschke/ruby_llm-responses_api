@@ -12,8 +12,9 @@ module RubyLLM
 
         module_function
 
-        def render_payload(messages, tools:, temperature:, model:, stream: false, schema: nil, thinking: nil) # rubocop:disable Metrics/ParameterLists,Lint/UnusedMethodArgument
-          # Extract system messages for instructions
+        # rubocop:disable Metrics/ParameterLists
+        def render_payload(messages, tools:, temperature:, model:, stream: false,
+                           schema: nil, thinking: nil, tool_prefs: nil) # rubocop:disable Lint/UnusedMethodArgument
           system_messages = messages.select { |m| m.role == :system }
           non_system_messages = messages.reject { |m| m.role == :system }
 
@@ -27,26 +28,32 @@ module RubyLLM
 
           payload[:instructions] = instructions unless instructions.empty?
           payload[:temperature] = temperature unless temperature.nil?
-
           payload[:tools] = tools.map { |_, tool| tool_for(tool) } if tools.any?
+          payload[:text] = build_schema_format(schema) if schema
 
-          if schema
-            payload[:text] = {
-              format: {
-                type: 'json_schema',
-                name: 'response',
-                schema: schema,
-                strict: schema[:strict] != false
-              }
-            }
-          end
-
-          # Auto-chain conversations: find the last response_id from assistant messages
-          # This enables automatic stateful conversations without manual tracking
           last_response_id = extract_last_response_id(messages)
           payload[:previous_response_id] = last_response_id if last_response_id
 
           payload
+        end
+        # rubocop:enable Metrics/ParameterLists
+
+        # Build the Responses API text format block from a schema.
+        # Schema arrives pre-normalized as { name:, schema:, strict: } from
+        # RubyLLM::Chat.with_schema (v1.13+), or as a raw hash (legacy).
+        def build_schema_format(schema)
+          schema_name = schema[:name] || 'response'
+          schema_def = schema[:schema] || schema
+          strict = schema.key?(:strict) ? schema[:strict] : true
+
+          {
+            format: {
+              type: 'json_schema',
+              name: schema_name,
+              schema: schema_def,
+              strict: strict
+            }
+          }
         end
 
         def extract_last_response_id(messages)

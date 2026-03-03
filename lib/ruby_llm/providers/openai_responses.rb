@@ -17,7 +17,9 @@ module RubyLLM
       end
 
       # Override to support WebSocket transport via with_params(transport: :websocket)
-      def complete(messages, tools:, temperature:, model:, params: {}, headers: {}, schema: nil, thinking: nil, &block) # rubocop:disable Metrics/ParameterLists
+      # rubocop:disable Metrics/ParameterLists
+      def complete(messages, tools:, temperature:, model:, params: {}, headers: {},
+                   schema: nil, thinking: nil, tool_prefs: nil, &block)
         if params[:transport]&.to_sym == :websocket
           ws_complete(messages, tools: tools, temperature: temperature, model: model,
                                 params: params.except(:transport), schema: schema,
@@ -26,6 +28,7 @@ module RubyLLM
           super
         end
       end
+      # rubocop:enable Metrics/ParameterLists
 
       def headers
         {
