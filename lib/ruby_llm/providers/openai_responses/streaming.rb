@@ -92,9 +92,13 @@ module RubyLLM
           call_id = data['call_id'] || data['item_id']
           return nil unless call_id
 
+          # Argument delta events don't carry a tool name — only the initial
+          # output_item.added event does. Omit `id` on nameless deltas so
+          # StreamAccumulator appends arguments to the latest tool call
+          # instead of creating a new entry that overwrites the named one.
           {
             call_id => ToolCall.new(
-              id: call_id,
+              id: data['name'] ? call_id : nil,
               name: data['name'],
               arguments: data['delta'] || ''
             )

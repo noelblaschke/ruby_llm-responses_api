@@ -567,7 +567,7 @@ RSpec.describe 'Streaming Module Unit Tests' do
         expect(chunk.role).to eq(:assistant)
       end
 
-      it 'builds chunk from function call delta' do
+      it 'builds chunk from function call delta without id (for accumulator append)' do
         data = {
           'type' => 'response.function_call_arguments.delta',
           'call_id' => 'call_123',
@@ -576,7 +576,10 @@ RSpec.describe 'Streaming Module Unit Tests' do
         chunk = described_class.build_chunk(data)
 
         expect(chunk.tool_calls).to be_a(Hash)
-        expect(chunk.tool_calls['call_123'].arguments).to eq('{"loc')
+        tool_call = chunk.tool_calls['call_123']
+        expect(tool_call.arguments).to eq('{"loc')
+        expect(tool_call.id).to be_nil
+        expect(tool_call.name).to be_nil
       end
 
       it 'builds chunk from completed response' do
@@ -643,6 +646,84 @@ RSpec.describe 'Streaming Module Unit Tests' do
         chunk = described_class.build_chunk(data)
 
         expect(chunk.content).to be_nil
+      end
+    end
+
+    describe 'tool call streaming accumulation' do
+      # Simulates the real OpenAI Responses API event sequence for a tool call.
+      # The output_item.added event carries the tool name; subsequent argument
+      # delta events carry fragments that must be appended to the same entry.
+      it 'accumulates tool call name and arguments from separate events' do
+        accumulator = RubyLLM::StreamAccumulator.new
+
+        # 1. output_item.added — establishes the tool call with name
+        added = described_class.build_chunk(
+          'type' => 'response.output_item.added',
+          'item' => { 'type' => 'function_call', 'call_id' => 'call_abc', 'name' => 'get_weather' }
+        )
+        accumulator.add(added)
+
+        # 2. function_call_arguments.delta — streams argument fragments
+        ['{"city"', ':"Berlin"', '}'].each do |fragment|
+          delta = described_class.build_chunk(
+            'type' => 'response.function_call_arguments.delta',
+            'call_id' => 'fc_xyz',
+            'delta' => fragment
+          )
+          accumulator.add(delta)
+        end
+
+        # 3. response.completed — final usage stats
+        completed = described_class.build_chunk(
+          'type' => 'response.completed',
+          'response' => { 'id' => 'resp_1', 'model' => 'gpt-4o', 'usage' => { 'input_tokens' => 10, 'output_tokens' => 5 } }
+        )
+        accumulator.add(completed)
+
+        message = accumulator.to_message(nil)
+
+        # The added event's entry should have empty args (deltas went to latest)
+        # The latest tool call should have accumulated all arguments
+        tool_calls = message.tool_calls
+        expect(tool_calls).not_to be_empty
+
+        # Find the entry with actual arguments
+        tool_with_args = tool_calls.values.find { |tc| tc.arguments.is_a?(Hash) && tc.arguments.any? }
+        expect(tool_with_args).not_to be_nil
+        expect(tool_with_args.arguments).to eq({ 'city' => 'Berlin' })
+      end
+
+      it 'accumulates arguments when delta call_id matches added call_id' do
+        accumulator = RubyLLM::StreamAccumulator.new
+
+        # When IDs match (same call_id in added and delta), it should work too
+        added = described_class.build_chunk(
+          'type' => 'response.output_item.added',
+          'item' => { 'type' => 'function_call', 'call_id' => 'call_abc', 'name' => 'get_weather' }
+        )
+        accumulator.add(added)
+
+        ['{"city"', ':"Berlin"', '}'].each do |fragment|
+          delta = described_class.build_chunk(
+            'type' => 'response.function_call_arguments.delta',
+            'call_id' => 'call_abc',
+            'delta' => fragment
+          )
+          accumulator.add(delta)
+        end
+
+        completed = described_class.build_chunk(
+          'type' => 'response.completed',
+          'response' => { 'id' => 'resp_1', 'model' => 'gpt-4o', 'usage' => { 'input_tokens' => 10, 'output_tokens' => 5 } }
+        )
+        accumulator.add(completed)
+
+        message = accumulator.to_message(nil)
+        tc = message.tool_calls['call_abc']
+
+        expect(tc).not_to be_nil
+        expect(tc.name).to eq('get_weather')
+        expect(tc.arguments).to eq({ 'city' => 'Berlin' })
       end
     end
 
